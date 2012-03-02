@@ -1,6 +1,9 @@
+# test_control-flow.j
+#                           wookay.noh at gmail.com
+
 load("../juliacat/UnitTest.j")
 
-begin
+function test_control_flow()
   assert_equal(1:5, 1:5)
 
   function producer()
@@ -14,4 +17,8 @@ begin
   assert_equal(4, consume(p))
   assert_equal(6, consume(p))
   assert_equal(nothing, consume(p))
+end
+
+if is_main()
+  UnitTest.run()
 end

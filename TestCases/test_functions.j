@@ -1,6 +1,9 @@
+# test_functions.j
+#                           wookay.noh at gmail.com
+
 load("../juliacat/UnitTest.j")
 
-begin
+function test_functions()
   assert_equal(9, +(2,3,4))
   local f = +;
   assert_equal(9, f(2,3,4))
@@ -27,4 +30,8 @@ begin
   end
   assert_equal(2, k(1))
   assert_equal("ab", k("ab"))
+end
+
+if is_main()
+  UnitTest.run()
 end

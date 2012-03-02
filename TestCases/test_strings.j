@@ -1,6 +1,9 @@
+# test_strings.j
+#                           wookay.noh at gmail.com
+
 load("../juliacat/UnitTest.j")
 
-begin
+function test_strings()
   assert_equal(ASCIIString, typeof("A"))
   assert_equal(UTF8String, typeof("한글"))
   assert_equal(Char, typeof('A'))
@@ -29,4 +32,8 @@ begin
 b
 c"""
   assert_equal(["a","b","c"], split(multilined, LF))
+end
+
+if is_main()
+  UnitTest.run()
 end
