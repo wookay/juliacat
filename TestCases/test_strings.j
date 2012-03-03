@@ -32,6 +32,12 @@ function test_strings()
 b
 c"""
   assert_equal(["a","b","c"], split(multilined, LF))
+
+  assert_equal("abc", *("a", "b", "c"))
+
+  +(s::String...) = join(s)
+  assert_equal("ab", "a" + "b")
+  assert_equal("abc", +("a", "b", "c"))
 end
 
 if is_main()

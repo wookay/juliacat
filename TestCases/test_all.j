@@ -9,6 +9,7 @@ test_strings.j
 test_functions.j
 test_types.j
 test_mathematical-operations.j
+test_hangul.j
 """), "\n")
   load(test)
 end
