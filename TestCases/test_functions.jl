@@ -1,7 +1,7 @@
-# test_functions.j
+# test_functions.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.j")
+load("../juliacat/UnitTest.jl")
 
 function test_functions()
   assert_equal(9, +(2,3,4))

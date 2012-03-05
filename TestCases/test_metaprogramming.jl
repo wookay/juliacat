@@ -1,7 +1,7 @@
-# test_metaprogramming.j
+# test_metaprogramming.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.j")
+load("../juliacat/UnitTest.jl")
 
 function test_metaprogramming()
   local expr = :(1+2)

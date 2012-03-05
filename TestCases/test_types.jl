@@ -1,7 +1,7 @@
-# test_types.j
+# test_types.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.j")
+load("../juliacat/UnitTest.jl")
 
 
 begin

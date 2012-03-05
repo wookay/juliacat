@@ -1,7 +1,7 @@
-# test_arrays.j
+# test_arrays.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.j")
+load("../juliacat/UnitTest.jl")
 
 function test_arrays_basic_functions()
   assert_equal(1, ndims([1,2,3]))

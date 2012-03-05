@@ -1,8 +1,8 @@
-# Hangul.j
+# Hangul.jl
 #                           wookay.noh at gmail.com
 
-# load("StringExt.j")
-# load("ArrayExt.j")
+# load("StringExt.jl")
+# load("ArrayExt.jl")
 
 const EMPTY = ""
 const Chosungs = _w"ㄱ ㄲ ㄴ ㄷ ㄸ ㄹ ㅁ ㅂ ㅃ ㅅ ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ"

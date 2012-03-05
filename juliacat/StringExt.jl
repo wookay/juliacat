@@ -1,4 +1,4 @@
-# StringExt.j
+# StringExt.jl
 #                           wookay.noh at gmail.com
 
 global const LF = "\n"

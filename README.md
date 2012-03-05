@@ -4,7 +4,7 @@ juliacat
 Julia practices
 
 
-	juliacat/TestCases$ julia test_all.j 
+	juliacat/TestCases$ julia test_all.jl
 	Started
 	.............................................................
 	Finished in 0.4637 seconds.

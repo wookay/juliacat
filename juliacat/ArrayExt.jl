@@ -1,3 +1,6 @@
+# ArrayExt.jl
+#                           wookay.noh at gmail.com
+
 function index(ary::Array, item)
   local found_idx = -1
   local idx = 1

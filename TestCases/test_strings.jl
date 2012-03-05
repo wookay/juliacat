@@ -1,7 +1,7 @@
-# test_strings.j
+# test_strings.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.j")
+load("../juliacat/UnitTest.jl")
 
 function test_strings()
   assert_equal(ASCIIString, typeof("A"))

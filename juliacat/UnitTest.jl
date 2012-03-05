@@ -1,4 +1,4 @@
-# UnitTest.j
+# UnitTest.jl
 #                           wookay.noh at gmail.com
 
 
@@ -17,7 +17,7 @@ function assert_equal(expected, got)
 end
 
 function is_main()
-  "test_all.j" != ARGS[1]
+  "test_all.jl" != ARGS[1]
 end
 
 if contains(VARIABLES, :UnitTestBase)

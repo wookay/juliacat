@@ -1,7 +1,7 @@
-# test_mathematical-operations.j
+# test_mathematical-operations.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.j")
+load("../juliacat/UnitTest.jl")
 
 function test_mathematical_operations()
   assert_equal(true, Inf == Inf)
