@@ -24,6 +24,8 @@ function test_arrays_basic_functions()
   catch err
     assert_equal("no promotion exists for Int64 and ASCIIString", string(err))
   end
+
+  assert_equal([1,2,3,4,5], [1:5])
 end
 
 if is_main()

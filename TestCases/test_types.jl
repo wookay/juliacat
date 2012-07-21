@@ -35,6 +35,7 @@ function test_types()
   assert_equal(true, isa(1,Int))
 
   assert_equal(1.0, convert(Float, 1))
+  assert_equal([1.0], convert(Array{Float,1}, [1]))
   assert_equal((1.0,2.0), promote(1, 2.0))
 end
 

@@ -8,6 +8,8 @@ function test_functions()
   local f = +;
   assert_equal(9, f(2,3,4))
 
+  assert_equal(6, reduce(-, 9, {2,1}))
+
   local g = x -> x^2 + 2x - 1
   assert_equal(14, g(3))
 

@@ -17,7 +17,11 @@ function assert_equal(expected, got)
 end
 
 function is_main()
-  "test_all.jl" != ARGS[1]
+  if length(ARGS) > 0
+    "test_all.jl" != ARGS[1]
+  else
+    true
+  end
 end
 
 if contains(VARIABLES, :UnitTestBase)

@@ -4,12 +4,13 @@
 for test = split(strip("""
 test_arrays.jl
 test_metaprogramming.jl
-test_control-flow.jl
+test_control_flow.jl
 test_strings.jl
 test_functions.jl
 test_types.jl
-test_mathematical-operations.jl
+test_mathematical_operations.jl
 test_hangul.jl
+test_parallel_computing.jl
 """), "\n")
   load(test)
 end

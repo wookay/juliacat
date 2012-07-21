@@ -1,4 +1,4 @@
-# test_control-flow.jl
+# test_control_flow.jl
 #                           wookay.noh at gmail.com
 
 load("../juliacat/UnitTest.jl")

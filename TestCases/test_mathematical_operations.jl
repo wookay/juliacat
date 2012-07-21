@@ -1,4 +1,4 @@
-# test_mathematical-operations.jl
+# test_mathematical_operations.jl
 #                           wookay.noh at gmail.com
 
 load("../juliacat/UnitTest.jl")
