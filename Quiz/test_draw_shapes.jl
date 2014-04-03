@@ -1,6 +1,6 @@
 # test_draw_shapes.jl
 
-load("../juliacat/UnitTest.jl")
+include("../juliacat/UnitTest.jl")
 
 function draw_diamond(n)
   return ""

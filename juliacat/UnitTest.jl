@@ -17,14 +17,10 @@ function assert_equal(expected, got)
 end
 
 function is_main()
-  if length(ARGS) > 0
-    "test_all.jl" != ARGS[1]
-  else
-    true
-  end
+  !isdefined(:IsNotMain)
 end
 
-if contains(VARIABLES, :UnitTestBase)
+if isdefined(:UnitTestBase)
 else
   type UnitTestBase
     run::Function
@@ -38,15 +34,15 @@ UnitTest = UnitTestBase(
     local setupAt = time()
     local tests = 0
     print("Started\n")
-    for fun = VARIABLES
-      if matches(r"^test_", string(fun))
+    for fun = names(Main)
+      if ismatch(r"^test_", string(fun))
         tests += 1
-        local expr = Expr(:call, {fun}, Any)
+        local expr = Expr(:call, fun)
         eval(expr)
       end
     end
-    printf("\nFinished in %.4f seconds.\n", time() - setupAt)
-    printf("%d tests, %d assertions, %d failures, %d errors\n",
+    @printf("\nFinished in %.4f seconds.\n", time() - setupAt)
+    @printf("%d tests, %d assertions, %d failures, %d errors\n",
       tests,
       UnitTest.passed,
       UnitTest.failed,

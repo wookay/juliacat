@@ -1,9 +1,9 @@
 # StringExt.jl
 #                           wookay.noh at gmail.com
 
-global const LF = "\n"
-global const SPACE = " "
-global const COMMA = ","
+const LF = "\n"
+const SPACE = " "
+const COMMA = ","
 
 macro _u_str(s)
   local sx = []
@@ -13,10 +13,10 @@ macro _u_str(s)
     push(sx, c)
     idx = k
   end
-  expr(:call, ()->sx)
+  Expr(:call, ()->sx)
   # expr(:call, ()->chars(s))
 end
 
 macro _w_str(s)
-  expr(:call, ()->split(s, SPACE))
+  Expr(:call, ()->split(s, SPACE))
 end

@@ -1,7 +1,7 @@
 # test_say.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.jl")
+include("../juliacat/UnitTest.jl")
 
 function test_say()
   외쳐 = x -> print(x)

@@ -1,7 +1,7 @@
 # test_strings.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.jl")
+include("../juliacat/UnitTest.jl")
 
 function test_strings()
   assert_equal(ASCIIString, typeof("A"))
@@ -16,12 +16,12 @@ function test_strings()
   assert_equal('l', str[end-1])
   assert_equal("He", str[1:2])
 
-  assert_equal("\$str\t", E"$str\t")
-  assert_equal("\$str\\t", L"$str\t")
-  assert_equal("$str", I"$str")
-  assert_equal([65,66], b"AB")
+  #assert_equal("\$str\t", E"$str\t")
+  #assert_equal("\$str\\t", L"$str\t")
+  #assert_equal("$str", I"$str")
+  #assert_equal([0x41,0x42], b"AB")
 
-  assert_equal("abc", strcat("a","b","c"))
+  assert_equal("abc", string("a","b","c"))
 
   const SPACE = " "
   assert_equal(["Hello","world"], split(str, SPACE))

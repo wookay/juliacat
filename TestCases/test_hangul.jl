@@ -1,10 +1,10 @@
 # test_hangul.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.jl")
-load("../juliacat/StringExt.jl")
-load("../juliacat/ArrayExt.jl")
-load("../juliacat/Hangul.jl")
+include("../juliacat/UnitTest.jl")
+include("../juliacat/StringExt.jl")
+include("../juliacat/ArrayExt.jl")
+include("../juliacat/Hangul.jl")
 
 function test_hangul()
   local han = hangul_split("한")

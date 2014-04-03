@@ -1,7 +1,7 @@
 # test_parallel_computing.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.jl")
+include("../juliacat/UnitTest.jl")
 
 # http://docs.julialang.org/en/latest/stdlib/base/#parallel-computing
 function test_parallel_computing()

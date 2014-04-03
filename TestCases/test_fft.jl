@@ -1,7 +1,7 @@
 # test_fft.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.jl")
+include("../juliacat/UnitTest.jl")
 
 # http://www.matlabinuse.com/index.php?document_srl=2494&mid=Mastering_MATLAB&sort_index=readed_count&order_type=desc
 # Time Domain

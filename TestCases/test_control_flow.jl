@@ -1,7 +1,7 @@
 # test_control_flow.jl
 #                           wookay.noh at gmail.com
 
-load("../juliacat/UnitTest.jl")
+include("../juliacat/UnitTest.jl")
 
 function test_control_flow()
   assert_equal(1:5, 1:5)

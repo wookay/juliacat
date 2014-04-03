@@ -1,8 +1,10 @@
 # Hangul.jl
 #                           wookay.noh at gmail.com
 
-# load("StringExt.jl")
-# load("ArrayExt.jl")
+if isdefined(:SPACE)
+else
+  include("StringExt.jl")
+end
 
 const EMPTY = ""
 const Chosungs = _w"ㄱ ㄲ ㄴ ㄷ ㄸ ㄹ ㅁ ㅂ ㅃ ㅅ ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ"
@@ -29,19 +31,23 @@ end
 
 function hangul_split(str::String)
   local ary = {}
-  for uchar = chars(str)
-    push(ary, hangul_split_uchar(uchar))
+  for uchar = str #chars(str)
+    push!(ary, hangul_split_uchar(uchar))
   end
   return ary
 end
 
 function hangul_chosungs(str::String)
   local ary = {}
-  for uchar = chars(str)
+  for uchar = str # chars(str)
     local t = hangul_split_uchar(uchar)
-    push(ary, t[1])
+    push!(ary, t[1])
   end
   return ary
+end
+
+function index(a, x)
+  findin(a, [x])[1]
 end
 
 function hangul_join(ary)
