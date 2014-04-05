@@ -20,14 +20,21 @@ end
 type 낱 소리
 end
 
-function index(a, x)
-  findin(a, [x])[1]
+function ==(갑::닿, 을::닿)
+  갑.소리 == 을.소리
+end
+function ==(갑::홀, 을::홀)
+  갑.소리 == 을.소리
+end
+function ==(갑::낱, 을::낱)
+  갑.소리 == 을.소리
 end
 
 function +(첫::닿, 가운뎃::홀)
   +(첫::닿, 가운뎃::홀, 닿(냉무))
 end
 
+index(순서, 소리) = findin(순서, [소리])[1]
 function +(첫::닿, 가운뎃::홀, 끝::닿)
   값 = 가 +
     (index(첫소리순서, 첫.소리) - 1) * 첫소리오프셋 +
@@ -49,11 +56,14 @@ end
   닿("ㄾ"), 닿("ㄿ"), 닿("ㅀ"), 닿("ㅄ")
 
 
-@assert "ㅎ" == ㅎ.소리
 @assert 닿 == typeof(ㅎ)
-@assert "ㅏ" == ㅏ.소리
 @assert 홀 == typeof(ㅏ)
-@assert "한" == (ㅎ+ㅏ+ㄴ).소리
 @assert 낱 == typeof(ㅎ+ㅏ+ㄴ)
+@assert 닿("ㅎ") == ㅎ
+@assert 홀("ㅏ") == ㅏ
+@assert 낱("한") == ㅎ+ㅏ+ㄴ
+@assert "ㅎ" == ㅎ.소리
+@assert "ㅏ" == ㅏ.소리
+@assert "한" == (ㅎ+ㅏ+ㄴ).소리
 @assert "글" == (ㄱ+ㅡ+ㄹ).소리
 @assert "이" == (ㅇ+ㅣ).소리

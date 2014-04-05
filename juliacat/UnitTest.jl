@@ -3,7 +3,7 @@
 
 
 function assert_equal(expected, got)
-  if isequal(expected, got)
+  if expected == got
     UnitTest.passed += 1
     if UnitTest.dot_if_passed
       print(".")
