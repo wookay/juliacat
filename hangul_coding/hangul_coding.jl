@@ -1,7 +1,7 @@
 # hangul_coding.jl
 #                           wookay.noh at gmail.com
 
-const 냉무 = ""
+const 냉무 = nothing
 const 공백 = " "
 macro _w_str(s)
   Expr(:call, ()->split(s, 공백))
