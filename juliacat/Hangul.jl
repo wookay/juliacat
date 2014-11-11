@@ -23,14 +23,14 @@ function hangul_split_uchar(uchar)
     n = n % ChosungOffset
     local n2 = int(n / JungsungOffset) + 1
     local n3 = int(n % JungsungOffset) + 1
-    return { Chosungs[n1], Jungsungs[n2], Jongsungs[n3] }
+    return [ Chosungs[n1], Jungsungs[n2], Jongsungs[n3] ]
   else
-    return { uchar }
+    return [ uchar ]
   end
 end
 
 function hangul_split(str::String)
-  local ary = {}
+  local ary = []
   for uchar = str #chars(str)
     push!(ary, hangul_split_uchar(uchar))
   end
@@ -38,7 +38,7 @@ function hangul_split(str::String)
 end
 
 function hangul_chosungs(str::String)
-  local ary = {}
+  local ary = []
   for uchar = str # chars(str)
     local t = hangul_split_uchar(uchar)
     push!(ary, t[1])

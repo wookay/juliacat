@@ -8,7 +8,8 @@ function test_functions()
   local f = +;
   assert_equal(9, f(2,3,4))
 
-  assert_equal(8, reduce(-, 9, {2,1}))
+  assert_equal(6, reduce(-, 9, [2,1]))
+  assert_equal(7, reduce(-, 9, 2))
 
   local g = x -> x^2 + 2x - 1
   assert_equal(14, g(3))
@@ -17,7 +18,6 @@ function test_functions()
   assert_equal(3, h(1,2))
 
   assert_equal((2,3,4), map(x->x+1, (1,2,3)))
-  assert_equal({2,3,4}, map(x->x+1, {1,2,3}))
   assert_equal([2,3,4], map(x->x+1, [1,2,3]))
 
   m(x) = x, x+1
