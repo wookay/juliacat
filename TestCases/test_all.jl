@@ -13,6 +13,7 @@ test_types.jl
 test_mathematical_operations.jl
 test_hangul.jl
 test_parallel_computing.jl
+test_docs.jl
 """), "\n")
   include(test)
 end
