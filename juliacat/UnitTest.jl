@@ -1,9 +1,8 @@
 # UnitTest.jl
 #                           wookay.noh at gmail.com
 
-
-function assert_equal(expected, got)
-  if expected == got
+function _assert_equal_func(result::Bool, expected, got)
+  if result
     UnitTest.passed += 1
     if UnitTest.dot_if_passed
       print(".")
@@ -14,6 +13,14 @@ function assert_equal(expected, got)
     UnitTest.failed += 1
     print("Assertion failed\nExpected: $expected\nGot: $got\n")
   end
+end
+
+function assert_equal(expected::Float64, got::Float64)
+  _assert_equal_func(isapprox(expected, got), expected, got)
+end    
+
+function assert_equal(expected, got)
+  _assert_equal_func(expected == got, expected, got)
 end
 
 function is_main()

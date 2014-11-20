@@ -34,6 +34,18 @@ function test_functions()
   assert_equal("ab", k("ab"))
 end
 
+function test_generic()
+  anony = () -> 42
+  assert_equal(false, isgeneric(anony)) 
+  assert_equal(true, isdefined(anony, :env)) 
+  assert_equal(true, isa(anony.env, Tuple)) 
+
+  generic() = 42
+  assert_equal(true, isgeneric(generic)) 
+  assert_equal(true, isdefined(generic, :env)) 
+  assert_equal(true, isa(generic.env, MethodTable)) 
+end
+
 if is_main()
   UnitTest.run()
 end
