@@ -16,10 +16,7 @@ function test_strings()
   assert_equal('l', str[end-1])
   assert_equal("He", str[1:2])
 
-  #assert_equal("\$str\t", E"$str\t")
-  #assert_equal("\$str\\t", L"$str\t")
-  #assert_equal("$str", I"$str")
-  #assert_equal([0x41,0x42], b"AB")
+  assert_equal([0x41,0x42], b"AB")
 
   assert_equal("abc", string("a","b","c"))
 

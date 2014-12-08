@@ -4,6 +4,14 @@
 include("../juliacat/UnitTest.jl")
 
 
+function test_restype()
+   f(::Type{Bool}) = 1
+   f(Bool) = 2
+
+  assert_equal(2, f(true))
+  assert_equal(1, f(Bool))
+end
+
 begin
   type 학생
     이름::String
@@ -33,8 +41,7 @@ function test_types()
   assert_equal(DataType, typeof(DataType))
   assert_equal(true, isa(1,Int))
 
-  #assert_equal(1.0, convert(Float, 1))
-  #assert_equal([1.0], convert(Array{Float,1}, [1]))
+  assert_equal(1.0, convert(FloatingPoint, 1))
   assert_equal((1.0,2.0), promote(1, 2.0))
 end
 
