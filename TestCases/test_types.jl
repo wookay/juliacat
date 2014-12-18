@@ -5,11 +5,13 @@ include("../juliacat/UnitTest.jl")
 
 
 function test_restype()
-   f(::Type{Bool}) = 1
-   f(Bool) = 2
+  f(::Type{Bool}) = 1
+  f(::Bool) = 2
+  f(Bool) = Bool
 
-  assert_equal(2, f(true))
   assert_equal(1, f(Bool))
+  assert_equal(2, f(true))
+  assert_equal(3, f(3))
 end
 
 begin
