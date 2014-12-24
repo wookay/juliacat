@@ -22,6 +22,7 @@ test_promotion.jl
 test_strings.jl
 test_types.jl
 test_ranges.jl
+test_versionnumber.jl
 """), "\n")
   include(test)
 end
