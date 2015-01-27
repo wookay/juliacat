@@ -19,6 +19,7 @@ test_metaprogramming.jl
 test_mpfr.jl
 test_parallel_computing.jl
 test_promotion.jl
+test_stagedfunction.jl
 test_strings.jl
 test_throw.jl
 test_types.jl
