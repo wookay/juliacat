@@ -15,7 +15,7 @@ f(a) = a+5 |> dozenal
 a = 0
 for key in keys
   println([key a|>f|>f|>f|>f a|>f|>f|>f a|>f|>f a|>f a+1 a|>f|>f|>f|>f])
-  a = a|>f|>dozenal
+  a = a|>f
 end
 
 # Any["C" 8 3 10 5 1 8]
