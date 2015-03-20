@@ -16,13 +16,13 @@ const Ga = 0xAC00
 const Hih = 0xD7A3
 
 function hangul_split_uchar(uchar)
-  local n = int(uchar)
+  local n = Int(uchar)
   if n >= Ga && n <= Hih
     n = n - Ga
-    local n1 = int(n / ChosungOffset) + 1
+    local n1 = round(Int, n / ChosungOffset) + 1
     n = n % ChosungOffset
-    local n2 = int(n / JungsungOffset) + 1
-    local n3 = int(n % JungsungOffset) + 1
+    local n2 = round(Int, n / JungsungOffset) + 1
+    local n3 = round(Int, n % JungsungOffset) + 1
     return [ Chosungs[n1], Jungsungs[n2], Jongsungs[n3] ]
   else
     return [ uchar ]
@@ -31,7 +31,7 @@ end
 
 function hangul_split(str::String)
   local ary = []
-  for uchar = str #chars(str)
+  for uchar = str
     push!(ary, hangul_split_uchar(uchar))
   end
   return ary
@@ -39,7 +39,7 @@ end
 
 function hangul_chosungs(str::String)
   local ary = []
-  for uchar = str # chars(str)
+  for uchar = str
     local t = hangul_split_uchar(uchar)
     push!(ary, t[1])
   end
@@ -56,5 +56,5 @@ function hangul_join(ary)
     (index(Chosungs, cho) - 1) * ChosungOffset +
     (index(Jungsungs, jung) - 1) * JungsungOffset +
     (index(Jongsungs, jong) - 1)
-  return string(char(uch))
+  return string(Char(uch))
 end

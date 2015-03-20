@@ -7,8 +7,8 @@ function test_strings()
   assert_equal(ASCIIString, typeof("A"))
   assert_equal(UTF8String, typeof("한글"))
   assert_equal(Char, typeof('A'))
-  assert_equal('A', char(65))
-  assert_equal(65, int('A'))
+  assert_equal('A', Char(65))
+  assert_equal(65, Int('A'))
 
   local str = "Hello world"
   assert_equal('H', str[1])
