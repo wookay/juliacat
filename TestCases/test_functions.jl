@@ -38,7 +38,7 @@ function test_generic()
   anony = () -> 42
   assert_equal(false, isgeneric(anony)) 
   assert_equal(true, isdefined(anony, :env)) 
-  assert_equal(true, isa(anony.env, Tuple)) 
+  assert_equal(true, isa(anony.env, SimpleVector)) 
 
   generic() = 42
   assert_equal(true, isgeneric(generic)) 

@@ -36,26 +36,27 @@ else
     failed::Int
   end
 end
-UnitTest = UnitTestBase(
-  function()
-    local setupAt = time()
-    local tests = 0
-    print("Started\n")
-    for fun = names(Main)
-      if ismatch(r"^test_", string(fun))
-        tests += 1
-        local expr = Expr(:call, fun)
-        eval(expr)
+
+function runner(; debug = false)
+  local setupAt = time()
+  local tests = 0
+  print("Started\n")
+  for fun = names(Main)
+    if ismatch(r"^test_", string(fun))
+      if debug
+        println("\n$fun")
       end
+      tests += 1
+      local expr = Expr(:call, fun)
+      eval(expr)
     end
-    @printf("\nFinished in %.4f seconds.\n", time() - setupAt)
-    @printf("%d tests, %d assertions, %d failures, %d errors\n",
-      tests,
-      UnitTest.passed,
-      UnitTest.failed,
-      0)
-  end,
-  true,
-  0,
-  0
-)
+  end
+  @printf("\nFinished in %.4f seconds.\n", time() - setupAt)
+  @printf("%d tests, %d assertions, %d failures, %d errors\n",
+    tests,
+    UnitTest.passed,
+    UnitTest.failed,
+    0)
+end
+
+UnitTest = UnitTestBase(runner, true, 0, 0)

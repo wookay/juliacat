@@ -38,7 +38,7 @@ function test_types()
   assert_equal(100, 홍.국어)
   assert_equal(80, 홍.산수)
 
-  assert_equal((), typeof(()))
+  assert_equal(Tuple{}, typeof(()))
   assert_equal(DataType, typeof(Int))
   assert_equal(DataType, typeof(DataType))
   assert_equal(true, isa(1,Int))

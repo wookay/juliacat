@@ -9,17 +9,20 @@ test_combinatorics.jl
 test_control_flow.jl
 test_dates.jl
 test_docs.jl
+test_enums.jl
 test_fft.jl
 test_floating_point_functions.jl
 test_functions.jl
 test_hangul.jl
 test_iteration.jl
+test_linarg.jl
+test_macro.jl
 test_mathematical_operations.jl
 test_metaprogramming.jl
+test_module.jl
 test_mpfr.jl
 test_parallel_computing.jl
 test_promotion.jl
-test_stagedfunction.jl
 test_strings.jl
 test_sysinfo.jl
 test_throw.jl
@@ -36,4 +39,5 @@ test_ccall.jl
 test_jump.jl
 """
 
+#UnitTest.run(debug = true)
 UnitTest.run()
