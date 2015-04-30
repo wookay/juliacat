@@ -1,4 +1,4 @@
-# test_all.jl
+# runtests.jl
 #                           wookay.noh at gmail.com
 
 IsNotMain = true
