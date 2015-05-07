@@ -28,6 +28,7 @@ test_sysinfo.jl
 test_throw.jl
 test_types.jl
 test_ranges.jl
+test_unicode_mathematical_operators.jl
 test_versionnumber.jl
 """), "\n")
   include(test)
