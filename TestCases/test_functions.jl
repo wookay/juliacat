@@ -48,16 +48,17 @@ end
 
 function test_do()
   f(block) = block(2)
-  result = f() do x
-             x+3
+  result = f() do a
+             a+1
            end
-  assert_equal(5, result)
+  assert_equal(3, result)
 
   f(block) = block(2, 3)
   result = f() do a, b
              a+b
            end
   assert_equal(5, result)
+  assert_equal(5, f((a,b) -> a+b))
 end
 
 if is_main()
