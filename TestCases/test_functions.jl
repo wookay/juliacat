@@ -46,6 +46,14 @@ function test_generic()
   assert_equal(true, isa(generic.env, MethodTable)) 
 end
 
+function test_do()
+  f(block) = block(2)
+  result = f() do x
+             x+1
+           end
+  assert_equal(3, result)
+end
+
 if is_main()
   UnitTest.run()
 end
