@@ -1,0 +1,3 @@
+language: julia
+script:
+  - julia TestCases/runtests.jl
