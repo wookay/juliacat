@@ -47,6 +47,11 @@ function test_types()
   assert_equal((1.0,2.0), promote(1, 2.0))
 end
 
+function test_fieldnames()
+  assert_equal([:dict], fieldnames(Set))
+  assert_equal([:dict], fieldnames(Set()))
+end
+
 if is_main()
   UnitTest.run()
 end
