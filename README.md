@@ -3,6 +3,8 @@ juliacat
 
 Julia practices
 
+[![Build Status](https://api.travis-ci.org/wookay/juliacat.svg?branch=master)](https://travis-ci.org/wookay/juliacat)
+
     $ julia TestCases/runtests.jl
     Started
     .....................................................................................................................................
