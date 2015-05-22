@@ -3,8 +3,9 @@
 int main(int argc, char *argv[])
 {
     /* required: setup the julia context */
-    //jl_init(JULIA_INIT_DIR);
-    jl_init_with_image(getenv("JULIA_LIB_DIR"), "sys.ji");
+    // jl_init(JULIA_INIT_DIR);
+    // export JULIA_LIB_JULIA="$JULIA_PREFIX/lib/julia"
+    jl_init_with_image(getenv("JULIA_PREFIX_LIB_JULIA"), "sys.ji");
 
     /* run julia commands */
     jl_eval_string("println(pi)");
