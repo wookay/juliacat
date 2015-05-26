@@ -3,7 +3,8 @@ juliacat
 
 Julia practices
 
-[![Build Status](https://api.travis-ci.org/wookay/juliacat.svg?branch=master)](https://travis-ci.org/wookay/juliacat)
+Linux, OSX: [![Build Status](https://api.travis-ci.org/wookay/juliacat.svg?branch=master)](https://travis-ci.org/wookay/juliacat)
+Windows: [![Build status](https://ci.appveyor.com/api/projects/status/lgd95jb11om4u3sq?svg=true)](https://ci.appveyor.com/project/wookay/juliacat)
 
     $ julia TestCases/runtests.jl
     Started
