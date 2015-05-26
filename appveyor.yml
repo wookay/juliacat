@@ -1,0 +1,20 @@
+environment:
+  matrix:
+  - JULIAVERSION: "stable/win64"
+
+branches:
+  only:
+    - master
+
+install:
+  - ps: (new-object net.webclient).DownloadFile($("http://status.julialang.org/download/"+$env:JULIAVERSION), "C:\projects\julia-binary.exe")
+  - C:\projects\julia-binary.exe /S /D=C:\projects\julia
+
+init:
+  - git config --global core.autocrlf input
+
+build_script:
+  - C:\projects\julia\bin\julia -e "versioninfo()"
+
+test_script:
+  - C:\projects\julia\bin\julia TestCases/runtests.jl
