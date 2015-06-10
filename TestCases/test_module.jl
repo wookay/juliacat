@@ -3,17 +3,17 @@
 
 include("../juliacat/UnitTest.jl")
 
-module A
-  module B
-    module C
-      a = 2
+module M
+  module A
+    module B
+      c = 2
     end
   end
 end
 
 
 function test_module()
-  assert_equal(2, A.B.C.a)
+  assert_equal(2, M.A.B.c)
 end
 
 if is_main()
