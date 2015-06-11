@@ -3,6 +3,8 @@
 
 include("../juliacat/UnitTest.jl")
 
+import Base.nextmajor
+
 function test_version_number()
   version = v"0.4.0-dev+3929"
   assert_equal(0, version.major)
@@ -11,6 +13,8 @@ function test_version_number()
   assert_equal(("dev",), version.prerelease)
   assert_equal((3929,), version.build)
   assert_equal(VersionNumber("1.2.3"), VersionNumber(1,2,3))
+
+  assert_equal(v"1.0.0", nextmajor(VERSION))
 end
 
 if is_main()
