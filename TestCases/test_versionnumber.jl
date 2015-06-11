@@ -15,6 +15,7 @@ function test_version_number()
   assert_equal(VersionNumber("1.2.3"), VersionNumber(1,2,3))
 
   assert_equal(v"1.0.0", nextmajor(VERSION))
+  assert_equal(v"2.0.0", nextmajor(v"1.0.0"))
 end
 
 if is_main()

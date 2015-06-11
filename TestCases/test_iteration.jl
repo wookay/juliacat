@@ -15,6 +15,7 @@ function test_start_done_next()
   cnt = 0
   I = [1,2,3]
   state = start(I)
+  assert_equal(1, state)
   while !done(I, state)
     (i, state) = next(I, state)
     cnt += 1
