@@ -4,14 +4,39 @@
 include("../juliacat/UnitTest.jl")
 
 
+function test_supertypes()
+
+  function supertypes(v)
+    types = []
+    T = typeof(v)
+    while true
+      push!(types, T)
+      if isa(Any, T)
+        break
+      end
+      T = super(T)
+    end
+    types
+  end
+
+  assert_equal([ASCIIString,DirectIndexString,AbstractString,Any], supertypes(""))
+  assert_equal([Int64,Signed,Integer,Real,Number,Any], supertypes(0))
+  assert_equal([Float64,FloatingPoint,Real,Number,Any], supertypes(3.14))
+  assert_equal([MathConst{:π},Real,Number,Any], supertypes(pi))
+  assert_equal([Dict{Any,Any},Associative{Any,Any},Any], supertypes(Dict()))
+  assert_equal([Tuple{},Any], supertypes(()))
+  assert_equal([Array{Any,1},DenseArray{Any,1},AbstractArray{Any,1},Any], supertypes([]))
+  assert_equal([SparseMatrixCSC{Float64,Int64},AbstractSparseArray{Float64,Int64,2},AbstractArray{Float64,2},Any], supertypes(speye(0)))
+
+  assert_equal((Int8,UInt8,Int16,UInt16,Int32,UInt32,Int64,UInt64,Int128,UInt128), Base.IntTypes)
+end
+
 function test_restype()
   f(::Type{Bool}) = 1
   f(::Bool) = 2
-  f(Bool) = Bool
 
   assert_equal(1, f(Bool))
   assert_equal(2, f(true))
-  assert_equal(3, f(3))
 end
 
 begin
@@ -45,6 +70,8 @@ function test_types()
 
   assert_equal(1.0, convert(FloatingPoint, 1))
   assert_equal((1.0,2.0), promote(1, 2.0))
+
+  assert_equal(issubtype, <:)
 end
 
 function test_fieldnames()
