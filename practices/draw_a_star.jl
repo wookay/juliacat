@@ -1,3 +1,6 @@
+# draw_a_star.jl
+#                           wookay.noh at gmail.com
+
 type Star
   data::Array
 end

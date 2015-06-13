@@ -28,7 +28,9 @@ test_strings.jl
 test_sysinfo.jl
 test_throw.jl
 test_types.jl
+test_random.jl
 test_ranges.jl
+test_set.jl
 test_unicode_mathematical_operators.jl
 test_versionnumber.jl
 """), "\n")
@@ -39,6 +41,7 @@ ignores = """
 test_code_native.jl
 test_ccall.jl
 test_jump.jl
+test_mecab.jl
 """
 
 #UnitTest.run(debug = true)
