@@ -1,8 +1,6 @@
 # score_report.jl
 #                           wookay.noh at gmail.com
 
-import Base.cpad
-
 @enum 과목 국어 영어 수학
 
 type 학생타입
@@ -42,6 +40,7 @@ end
 
 
 
+import Base.cpad
 cpad8(x) = cpad(string(x), 8)
 
 println(repeat("=", 65))
