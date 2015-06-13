@@ -1,4 +1,4 @@
-# draw_a_star.jl
+# half_pyramid.jl
 #                           wookay.noh at gmail.com
 
 type Star
