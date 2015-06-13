@@ -4,17 +4,13 @@
 # 5도권
 # http://guzene.tistory.com/64
 
-macro _w_str(s)
-  Expr(:call, ()->split(s, " "))
-end
-
-keys = _w"C F Bb Eb Ab Db Gb B E A D G"
+keys = "C F Bb Eb Ab Db Gb B E A D G" |> split
 dozenal(a) = a >= 12 ? a-12 : a
 f(a) = a+5 |> dozenal
 
 a = 0
 for key in keys
-  println([key a|>f|>f|>f|>f a|>f|>f|>f a|>f|>f a|>f a+1 a|>f|>f|>f|>f])
+  [key a|>f|>f|>f|>f a|>f|>f|>f a|>f|>f a|>f a+1 a|>f|>f|>f|>f] |> println
   a = a|>f
 end
 
