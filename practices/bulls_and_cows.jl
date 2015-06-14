@@ -14,8 +14,7 @@ function solve(secret, guess)
       cows += 1
     end
   end
-  println("$bulls bulls, $cows cows")
-  DIGITS == bulls
+  bulls, cows 
 end
 
 function valid_guess(input)
@@ -45,7 +44,9 @@ function bulls_and_cows()
     "0" == input && break
     valid, guess = valid_guess(input)
     if valid
-      if solve(secret, guess)
+      bulls, cows = solve(secret, guess)
+      println("$bulls bulls, $cows cows")
+      if DIGITS == bulls
         println("$(tries)번만에 정답을 맞췄습니다!")
         break
       end
