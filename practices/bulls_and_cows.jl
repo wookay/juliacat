@@ -3,7 +3,7 @@
 #
 # https://en.wikipedia.org/wiki/Bulls_and_Cows
 
-DIGITS = 3
+DIGITS = 4
 
 function solve(secret, guess)
   bulls, cows = 0, 0
