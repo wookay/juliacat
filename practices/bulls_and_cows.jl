@@ -3,7 +3,7 @@
 #
 # https://en.wikipedia.org/wiki/Bulls_and_Cows
 
-DIGITS = 4
+DIGITS = 3
 
 function solve(secret, guess)
   bulls, cows = 0, 0
@@ -24,16 +24,18 @@ secret = randperm(9)[1:DIGITS]
 
 tries = 1
 println("Bulls and Cows")
-println("$DIGITS 자리 숫자를 입력하세요 (0: 그만하기)")
+println("1부터 9까지 $DIGITS 자리 숫자를 입력하세요 (0: 그만하기)")
 while true
   print("입력: ")
   input = chomp(readline())
   0 == length(input) && continue
   "0" == input && break
   guess = map(x->parse(Int,x), split(input, ""))
-  if DIGITS == length(guess) && DIGITS == length(unique(guess))
+  if DIGITS == length(guess) &&
+     DIGITS == length(unique(guess)) &&
+     all(x->x in 1:9, guess)
     if solve(secret, guess)
-      println("$tries번만에 $(secret |> join)를 맞췄습니다!")
+      println("$(tries)번만에 정답을 맞췄습니다!")
       break
     end
     tries += 1
