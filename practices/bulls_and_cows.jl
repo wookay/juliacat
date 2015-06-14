@@ -28,27 +28,32 @@ function valid_guess(input)
   end
 end
 
-secret = randperm(9)[1:DIGITS]
-# println(secret)
-
-tries = 1
-println("Bulls and Cows")
-message = "1부터 9까지 서로 다른 $(DIGITS)자리 숫자를 입력하세요"
-println("$message (0: 그만하기)")
-
-while true
-  print("입력: ")
-  input = chomp(readline())
-  0 == length(input) && continue
-  "0" == input && break
-  valid, guess = valid_guess(input)
-  if valid
-    if solve(secret, guess)
-      println("$(tries)번만에 정답을 맞췄습니다!")
-      break
+function bulls_and_cows()
+  secret = randperm(9)[1:DIGITS]
+  # println(secret)
+  
+  message = "1부터 9까지 서로 다른 $(DIGITS)자리 숫자를 입력하세요"
+  
+  println("Bulls and Cows")
+  println("$message (0: 그만하기)")
+  
+  tries = 1
+  while true
+    print("입력: ")
+    input = chomp(readline())
+    0 == length(input) && continue
+    "0" == input && break
+    valid, guess = valid_guess(input)
+    if valid
+      if solve(secret, guess)
+        println("$(tries)번만에 정답을 맞췄습니다!")
+        break
+      end
+      tries += 1
+    else
+      println("- $message")
     end
-    tries += 1
-  else
-    println("- $message")
   end
 end
+
+bulls_and_cows()
