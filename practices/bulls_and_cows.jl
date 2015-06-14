@@ -24,7 +24,8 @@ secret = randperm(9)[1:DIGITS]
 
 tries = 1
 println("Bulls and Cows")
-println("1부터 9까지 $DIGITS 자리 숫자를 입력하세요 (0: 그만하기)")
+msg = "1부터 9까지 서로 다른 $(DIGITS)자리 숫자를 입력하세요"
+println("$msg (0: 그만하기)")
 while true
   print("입력: ")
   input = chomp(readline())
@@ -40,6 +41,6 @@ while true
     end
     tries += 1
   else
-    println("- $DIGITS 자리의 다른 숫자를 입력하세요.")
+    println("- $msg")
   end
 end
