@@ -23,8 +23,9 @@ function valid_guess(input)
     guess = map(x->parse(Int,x), split(input, ""))
     valid = DIGITS == length(unique(guess)) && all(x->x in 1:9, guess)
     return valid, guess
+  else
+    return false, []
   end
-  return false, []
 end
 
 secret = randperm(9)[1:DIGITS]
