@@ -1,6 +1,7 @@
 # UnitTest.jl
 #                           wookay.noh at gmail.com
 
+global current_expr
 function _assert_equal_func(result::Bool, expected, got)
   if result
     UnitTest.passed += 1
@@ -11,16 +12,24 @@ function _assert_equal_func(result::Bool, expected, got)
     end
   else
     UnitTest.failed += 1
-    print("Assertion failed\nExpected: $expected\nGot: $got\n")
+    print("Assertion failed on $current_expr\nExpected: $expected\n     Got: $got\n")
   end
 end
 
 function assert_equal(expected::Float64, got::Float64)
   _assert_equal_func(isapprox(expected, got), expected, got)
-end    
+end
 
 function assert_equal(expected, got)
   _assert_equal_func(expected == got, expected, got)
+end
+
+function assert_true(got::Bool)
+  _assert_equal_func(true == got, true, got)
+end
+
+function assert_false(got::Bool)
+  _assert_equal_func(false == got, false, got)
 end
 
 function is_main()
@@ -48,6 +57,7 @@ function runner(; debug = false)
       end
       tests += 1
       local expr = Expr(:call, fun)
+      global current_expr = expr
       eval(expr)
     end
   end

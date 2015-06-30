@@ -4,8 +4,15 @@
 include("../juliacat/UnitTest.jl")
 
 # https://github.com/Keno/Cxx.jl
-using Cxx
 
+try
+  Pkg.installed("Cxx")
+catch
+  Pkg.clone("git@github.com:Keno/Cxx.jl.git")
+end
+
+println("using Cxx")
+using Cxx
 cxx"""
 
 #include <iostream>
@@ -43,6 +50,14 @@ function test_cxx()
 
   @cxx b->add(2)
   assert_equal(7, @cxx b->num)
+end
+
+function test_cxx_string()
+  cxx"""
+    const char *p = "abc";
+  """
+  s = @cxx p
+  assert_equal("abc", bytestring(s))
 end
 
 if is_main()
