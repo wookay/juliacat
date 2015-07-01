@@ -26,7 +26,7 @@ function test_banner()
     d2 = "\033[31m" # second dot
     d3 = "\033[32m" # third dot
     d4 = "\033[35m" # fourth dot
-    
+
     assert_equal("""\033[1m               $(d3)_$(tx)
            $(d1)_$(tx)       $(jl)_$(tx) $(d2)_$(d3)(_)$(d4)_$(tx)     |  A fresh approach to technical computing
           $(d1)(_)$(jl)     | $(d2)(_)$(tx) $(d4)(_)$(tx)    |  Documentation: http://docs.julialang.org

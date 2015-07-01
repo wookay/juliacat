@@ -14,6 +14,13 @@ function test_core()
   assert_false(is([], []))
 end
 
+function test_char()
+  x = '\U1f355'
+  assert_equal(2, charwidth(x))
+  assert_true(isa(x, Char))
+  assert_isa(x, Char)
+end
+
 if is_main()
   UnitTest.run()
 end

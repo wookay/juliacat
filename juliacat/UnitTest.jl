@@ -32,6 +32,10 @@ function assert_false(got::Bool)
   _assert_equal_func(false == got, false, got)
 end
 
+function assert_isa{T}(got::T, typ::Type{T})
+  _assert_equal_func(isa(got, typ), true, got)
+end
+
 function is_main()
   !isdefined(:IsNotMain)
 end
