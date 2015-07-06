@@ -13,6 +13,24 @@ function test_metaprogramming()
   assert_equal(expr, Expr(:call,:+,1,2))
 end
 
+macro m(expr)
+  if isa(expr, Symbol)
+    nothing, Expr(expr)
+  elseif isa(expr, Expr)
+    nothing, expr
+  end
+end
+function test_meta()
+  _,expr = @m entry
+  assert_equal(:entry, expr.head)
+  assert_true(Meta.isexpr(expr, :entry))
+  assert_equal(Any[], expr.args)
+  _,expr = @m entry()
+  assert_equal(:call, expr.head)
+  assert_true(Meta.isexpr(expr, :call))
+  assert_equal(Any[:entry], expr.args)
+end
+
 if is_main()
   UnitTest.run()
 end

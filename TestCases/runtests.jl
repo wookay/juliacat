@@ -40,6 +40,7 @@ test_ranges.jl
 test_reflection.jl
 test_set.jl
 test_show.jl
+test_tuple.jl
 test_unicode_mathematical_operators.jl
 test_versionnumber.jl
 """), "\n")

@@ -40,10 +40,14 @@ function test_restype()
 end
 
 begin
-  type 학생
+  abstract 사람
+  type 선생님 <: 사람
     이름::String
-    국어::Int
-    산수::Int
+  end
+  type 학생{T<:Int} <: 사람
+    이름::String
+    국어::T
+    산수::T
   end
 end
 

@@ -1,3 +1,6 @@
+// $ gcc -o embed -I$(JULIA_PREFIX)/include/julia -L$(JULIA_PREFIX)/lib/julia -ljulia embed.c
+// $ DYLD_LIBRARY_PATH=$(JULIA_PATH)/usr/lib ./embed
+
 #include <julia.h>
 
 int main(int argc, char *argv[])

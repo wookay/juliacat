@@ -4,4 +4,4 @@ os:
 julia:
   - nightly
 script:
-  - julia TestCases/runtests.jl
+  - julia --color=yes TestCases/runtests.jl

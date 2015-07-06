@@ -1,14 +1,10 @@
-# test_macro.jl
+# test_tuple.jl
 #                           wookay.noh at gmail.com
 
 include("../juliacat/UnitTest.jl")
 
-macro m()
-  1 
-end
-
-function test_macro()
-  assert_equal(1, @m)
+function test_tuple()
+  assert_equal(Tuple{Int}, Tuple{[Int]...})
 end
 
 if is_main()

@@ -61,6 +61,29 @@ function test_do()
   assert_equal(5, f((a,b) -> a+b))
 end
 
+function test_varargs_functions()
+  f(a...) = length(a)
+  assert_equal(0, f())
+  assert_equal(1, f([1,2]))
+end
+
+function test_optional_arguments()
+  f(;a=3) = a
+  assert_equal(3, f())
+  assert_equal(1, f(a=1))
+end
+
+# staged function
+@generated function gen(x)
+  assert_equal(Int, x)
+  :(x + 2)
+end
+
+function test_generated()
+  f = gen(1)
+  assert_equal(3, f)
+end
+
 if is_main()
   UnitTest.run()
 end

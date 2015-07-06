@@ -1,7 +1,17 @@
 # UnitTest.jl
 #                           wookay.noh at gmail.com
 
-global current_expr
+function show_backtrace()
+  b = backtrace()[4]
+  lkup = ccall(:jl_lookup_code_address, Any, (Ptr{Void}, Cint), b, true)
+  fname, file, line, fromC = lkup
+  buf = IOBuffer()
+  Base.show_trace_entry(buf, fname, file, line, fromC)
+  trace = takebuf_string(buf)
+  close(buf)
+  lstrip(trace)
+end
+
 function _assert_equal_func(result::Bool, expected, got)
   if result
     UnitTest.passed += 1
@@ -12,7 +22,10 @@ function _assert_equal_func(result::Bool, expected, got)
     end
   else
     UnitTest.failed += 1
-    print("Assertion failed on $current_expr\nExpected: $expected\n     Got: $got\n")
+    Base.have_color && print("\033[31m")
+    print("\nAssertion failed $(show_backtrace())")
+    Base.have_color && print("\033[0m")
+    print("\nExpected: $expected\n     Got: $got\n")
   end
 end
 
@@ -60,17 +73,16 @@ function runner(; debug = false)
         println("\n$fun")
       end
       tests += 1
-      local expr = Expr(:call, fun)
-      global current_expr = expr
-      eval(expr)
+      eval(Expr(:call, fun))
     end
   end
   @printf("\nFinished in %.4f seconds.\n", time() - setupAt)
+  Base.have_color && print("\033[$(UnitTest.failed > 0 ? 31 : 32)m")
+  
   @printf("%d tests, %d assertions, %d failures, %d errors\n",
-    tests,
-    UnitTest.passed,
-    UnitTest.failed,
-    0)
+    tests, UnitTest.passed, UnitTest.failed, 0)
+
+  Base.have_color && print("\033[0m")
 end
 
 UnitTest = UnitTestBase(runner, true, 0, 0)

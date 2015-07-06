@@ -37,6 +37,10 @@ c"""
   assert_equal("abc", +("a", "b", "c"))
 end
 
+function test_regex()
+  m = match(r"(?P<hour>\d+):(?P<minute>\d+)","12:45") 
+end
+
 if is_main()
   UnitTest.run()
 end
