@@ -3,14 +3,34 @@
 
 include("../juliacat/UnitTest.jl")
 
-using .Docs
+module Dog
 
-@doc """
-`test_docs()`: docs 테스트
-""" ->
-function test_docs()
-  assert_equal("test_docs()", doc(test_docs)[1].content[1].content[1].code)
-  assert_equal(": docs 테스트", doc(test_docs)[1].content[1].content[2])
+"dog"
+Dog
+
+"wal wal"
+function bark()
+  1 + 2
+  42
+end
+
+end
+
+
+function test_dog()
+  m = Base.Docs.meta(Dog)
+  assert_equal(doc"dog", m[Dog])
+
+  funcdoc = m[Dog.bark]
+  b = methods(Dog.bark, ())[1]
+  assert_equal(doc"wal wal", funcdoc.meta[b])
+  assert_isa(funcdoc.source[b], Expr)
+  assert_equal("""
+function bark() # $(@__FILE__), line 13:
+    1 + 2 # line 14:
+    42
+end""", funcdoc.source[b] |> string)
+
 end
 
 if is_main()
