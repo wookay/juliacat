@@ -7,7 +7,7 @@ include("../juliacat/UnitTest.jl")
 
 function test_enums()
   assert_equal(0, Int(O))
-  assert_equal(1, A.val)
+  assert_equal(1, Int(A))
   assert_equal(O, 혈액형(0))
   assert_equal(O, typemin(혈액형))
   assert_equal(AB, typemax(혈액형))

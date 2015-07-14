@@ -1,6 +1,13 @@
 # UnitTest.jl
 #                           wookay.noh at gmail.com
 
+macro loading(modul)
+  print("loading $modul ")
+  expr = Expr(:using, modul)
+  elapsed = @elapsed eval(expr)
+  println("elapsed in $elapsed seconds.")
+end
+
 function show_backtrace()
   b = backtrace()[4]
   lkup = ccall(:jl_lookup_code_address, Any, (Ptr{Void}, Cint), b, true)
@@ -35,6 +42,10 @@ end
 
 function assert_equal(expected, got)
   _assert_equal_func(expected == got, expected, got)
+end
+
+function assert_not_equal(expected, got)
+  _assert_equal_func(expected != got, expected, got)
 end
 
 function assert_true(got::Bool)

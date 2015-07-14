@@ -11,11 +11,9 @@ catch
   Pkg.clone("git@github.com:Keno/Cxx.jl.git")
 end
 
-print("loading Cxx ")
-elapsed = @elapsed eval(:(using Cxx))
-println("elapsed in $elapsed seconds.")
-cxx"""
+@loading Cxx
 
+cxx"""
 #include <iostream>
 
 class A {

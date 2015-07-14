@@ -83,6 +83,17 @@ function test_fieldnames()
   assert_equal([:dict], fieldnames(Set()))
 end
 
+type Say
+end
+function test_singleton()
+  hi(::Type{Say}) = 42
+  assert_equal(42, hi(Say))
+end
+
+function test_union()
+  assert_equal(Union{Int,String}, Union{String,Int})
+end
+
 if is_main()
   UnitTest.run()
 end

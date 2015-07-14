@@ -39,6 +39,16 @@ function test_arrays_basic_functions()
   # assert_equal([1,2,3,4,5], [1:5])
 end
 
+function test_array_expression()
+  assert_equal([1,2,3], [1;2;3])
+  assert_equal([1,2,3], [1 2 3][:])
+  assert_equal([1,2,3], [1;2;3][:])
+  assert_equal([1 2 3], [1;2;3]')
+  assert_equal([1 2 3], [1,2,3]')
+  assert_equal(hcat([1;2;3]), [1 2 3]')
+  assert_not_equal([1;2;3], [1 2 3]')
+end
+
 if is_main()
   UnitTest.run()
 end

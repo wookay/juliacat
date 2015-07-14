@@ -4,6 +4,7 @@
 IsNotMain = true
 
 for test = split(strip("""
+test_any.jl
 test_arrays.jl
 test_banner.jl
 test_base.jl
@@ -50,8 +51,10 @@ end
 ignores = """
 test_code_native.jl
 test_ccall.jl
+test_cxx.jl
 test_jump.jl
 test_mecab.jl
+test_reactive.jl
 """
 
 #UnitTest.run(debug = true)
