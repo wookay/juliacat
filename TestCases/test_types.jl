@@ -92,6 +92,12 @@ end
 
 function test_union()
   assert_equal(Union{Int,String}, Union{String,Int})
+
+  IntOrString = Union{Int, String}
+  f(x::IntOrString) = typeof(x)
+
+  assert_equal(Int, f(1))
+  assert_equal(ASCIIString, f(""))
 end
 
 if is_main()
