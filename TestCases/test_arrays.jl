@@ -27,16 +27,6 @@ function test_arrays_basic_functions()
 
   assert_equal([1, 2, 3], append!([1, 2], [3]))
   assert_equal(3, pop!([1, 2, 3]))
-
-  assert_equal([1 2 "a"], [1 2 "a"])
-  assert_equal([1 2], [1 2])
-  try
-    [1 2 "a"]
-  catch err
-    assert_equal("no promotion exists for Int64 and ASCIIString", string(err))
-  end
-
-  # assert_equal([1,2,3,4,5], [1:5])
 end
 
 function test_array_expression()
@@ -47,6 +37,14 @@ function test_array_expression()
   assert_equal([1 2 3], [1,2,3]')
   assert_equal(hcat([1;2;3]), [1 2 3]')
   assert_not_equal([1;2;3], [1 2 3]')
+
+  assert_equal([1 2 3 4], [[1 2] [3 4]])
+  assert_equal([1 2; 3 4], [[1 2]; [3 4]])
+
+  assert_equal([1 2 "a"], [1 2 "a"])
+  assert_equal([1,2,3,4,5], [1:5...])
+
+  assert_isa(Array(Int,1,1,1), Array{Int64,3})
 end
 
 if is_main()
