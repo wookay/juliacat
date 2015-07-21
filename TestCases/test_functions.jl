@@ -5,7 +5,7 @@ include("../juliacat/UnitTest.jl")
 
 function test_functions()
   assert_equal(9, +(2,3,4))
-  local f = +;
+  local f = +
   assert_equal(9, f(2,3,4))
 
   assert_equal(6, reduce(-, 9, [2,1]))
@@ -36,14 +36,14 @@ end
 
 function test_generic()
   anony = () -> 42
-  assert_equal(false, isgeneric(anony)) 
-  assert_equal(true, isdefined(anony, :env)) 
-  assert_equal(true, isa(anony.env, SimpleVector)) 
+  assert_false(isgeneric(anony))
+  assert_true(isdefined(anony, :env))
+  assert_isa(anony.env, SimpleVector)
 
   generic() = 42
-  assert_equal(true, isgeneric(generic)) 
-  assert_equal(true, isdefined(generic, :env)) 
-  assert_equal(true, isa(generic.env, MethodTable)) 
+  assert_true(isgeneric(generic))
+  assert_true(isdefined(generic, :env))
+  assert_isa(generic.env, MethodTable)
 end
 
 function test_do()

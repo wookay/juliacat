@@ -3,7 +3,27 @@
 
 include("../juliacat/UnitTest.jl")
 
-function test_linarg()
+function test_lu_factorization()
+  A = [4 3; 6 3]
+  (L, U, p) = lu(A)
+  assert_equal([1.0 0.0;4/6 1.0], L)
+  assert_equal([6.0 3.0;0.0 1.0], U)
+  assert_equal([2, 1], p)
+
+  A = [1 -2 3; 2 -5 12; 0 2 -10]
+  (L, U, p) = lu(A)
+  assert_equal(
+[1.0 0.0 0.0
+ 0.0 1.0 0.0
+ 0.5 0.25 1.0], L)
+  assert_equal(
+[2.0 -5.0 12.0
+ 0.0 2.0 -10.0
+ 0.0 0.0 -0.5], U)
+  assert_equal([2,3,1], p)
+end
+
+function test_triangular()
   srand(0)
   assert_equal([
     0.8236475079774124  0.0                  0.0                  0.0                 0.0

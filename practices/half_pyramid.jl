@@ -27,7 +27,7 @@ using Base.Test
 
 buf = IOBuffer()
 
-tri = Array(LowerTriangular(ones(Int,5,5)))
+tri = Array(tril(ones(Int,5,5)))
 
 show(buf, star(tri))
 println(buf)
