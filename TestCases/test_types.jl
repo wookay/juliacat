@@ -100,6 +100,13 @@ function test_union()
   assert_equal(ASCIIString, f(""))
 end
 
+function test_set_theoretic_types()
+  assert_equal(Int64,
+    typeintersect(Union{Int64,ASCIIString}, Int64))
+  assert_equal(Union{Int64,ASCIIString},
+    typejoin(Int, Union{ASCIIString, Int}))
+end
+
 if is_main()
   UnitTest.run()
 end
