@@ -47,6 +47,56 @@ function test_array_expression()
   assert_isa(Array(Int,1,1,1), Array{Int64,3})
 end
 
+function test_comprehensions()
+  A = [i*j for i=1:9, j=2:9]
+
+  assert_equal([
+  2   3   4   5   6   7   8   9
+  4   6   8  10  12  14  16  18
+  6   9  12  15  18  21  24  27
+  8  12  16  20  24  28  32  36
+ 10  15  20  25  30  35  40  45
+ 12  18  24  30  36  42  48  54
+ 14  21  28  35  42  49  56  63
+ 16  24  32  40  48  56  64  72
+ 18  27  36  45  54  63  72  81
+], A) # 9x8 Array{Int64,2}
+
+  assert_equal([
+  2
+  4
+  6
+  8
+ 10
+ 12
+ 14
+ 16
+ 18
+], A[:,1]) # 9-element Array{Int64,1}
+
+  assert_equal([
+  2   3
+  4   6
+  6   9
+  8  12
+ 10  15
+ 12  18
+ 14  21
+ 16  24
+ 18  27
+], A[:,1:2]) # 9x2 Array{Int64,2}
+  
+  assert_equal([
+ 2  3  4  5  6  7  8  9
+], A[1,:]) # 1x8 Array{Int64,2}
+
+  assert_equal([
+ 2  3  4   5   6   7   8   9
+ 4  6  8  10  12  14  16  18
+], A[1:2,:]) # 2x8 Array{Int64,2}
+
+end
+
 if is_main()
   UnitTest.run()
 end
