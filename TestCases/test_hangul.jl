@@ -6,6 +6,8 @@ include("../juliacat/StringExt.jl")
 include("../juliacat/ArrayExt.jl")
 include("../juliacat/Hangul.jl")
 
+if VERSION.minor > 3 @eval begin
+
 function test_hangul()
   local han = hangul_split("한")
   assert_equal(Any[["ㅎ","ㅏ","ㄴ"]], han)
@@ -15,6 +17,8 @@ function test_hangul()
 
   assert_equal("한", hangul_join(["ㅎ","ㅏ","ㄴ"]))
 end
+
+end end
 
 if is_main()
   UnitTest.run()

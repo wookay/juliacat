@@ -77,6 +77,7 @@ end
 function runner(; debug = false)
   local setupAt = time()
   local tests = 0
+  local errors = 0
   print("Started\n")
   for fun = names(Main)
     if ismatch(r"^test_", string(fun))
@@ -84,14 +85,22 @@ function runner(; debug = false)
         println("\n$fun")
       end
       tests += 1
-      eval(Expr(:call, fun))
+      try
+        eval(Expr(:call, fun))
+      catch err
+        errors += 1
+        Base.have_color && print("\033[31m")
+        println("$err in $fun")
+        Base.have_color && print("\033[0m")
+      end
     end
   end
   @printf("\nFinished in %.4f seconds.\n", time() - setupAt)
-  Base.have_color && print("\033[$(UnitTest.failed > 0 ? 31 : 32)m")
+  fail = UnitTest.failed > 0 || errors > 0
+  Base.have_color && print("\033[$(fail ? 31 : 32)m")
   
   @printf("%d tests, %d assertions, %d failures, %d errors\n",
-    tests, UnitTest.passed, UnitTest.failed, 0)
+    tests, UnitTest.passed, UnitTest.failed, errors)
 
   Base.have_color && print("\033[0m")
 end

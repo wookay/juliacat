@@ -3,12 +3,20 @@
 
 include("../juliacat/UnitTest.jl")
 
+if VERSION.minor > 3 @eval begin
+
+function test_strings_constructed()
+  assert_equal('A', Char(65))
+  assert_equal(65, Int('A'))
+end
+
+end end
+
+
 function test_strings()
   assert_equal(ASCIIString, typeof("A"))
   assert_equal(UTF8String, typeof("한글"))
   assert_equal(Char, typeof('A'))
-  assert_equal('A', Char(65))
-  assert_equal(65, Int('A'))
 
   local str = "Hello world"
   assert_equal('H', str[1])

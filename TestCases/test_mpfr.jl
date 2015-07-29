@@ -5,10 +5,14 @@
 
 include("../juliacat/UnitTest.jl")
 
+if VERSION.minor > 3 @eval begin
+
 function test_mpfr()
   assert_equal(2, ceil(Int, 2.0))
   assert_equal(3, ceil(Int, 2.1))
 end
+
+end end
 
 if is_main()
   UnitTest.run()

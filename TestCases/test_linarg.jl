@@ -23,6 +23,9 @@ function test_lu_factorization()
   assert_equal([2,3,1], p)
 end
 
+
+if VERSION.minor > 3 @eval begin
+
 function test_triangular()
   srand(0)
   assert_equal([
@@ -40,6 +43,9 @@ function test_triangular()
     0.0                 0.0                  0.0                  0.0                 0.3121451099216308
   ], UpperTriangular(rand(5,5)))
 end
+
+end end
+
 
 if is_main()
   UnitTest.run()

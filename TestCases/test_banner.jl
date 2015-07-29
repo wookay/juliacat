@@ -3,6 +3,8 @@
 
 include("../juliacat/UnitTest.jl")
 
+if VERSION.minor > 3 @eval begin
+
 function test_banner()
   buf = IOBuffer()
   Base.banner(buf)
@@ -53,6 +55,9 @@ function test_banner()
 
   close(buf)  
 end
+
+end end 
+
 
 if is_main()
   UnitTest.run()

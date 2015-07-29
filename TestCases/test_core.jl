@@ -4,7 +4,6 @@
 include("../juliacat/UnitTest.jl")
 
 function test_core()
-  assert_equal(Core, @which is)
   assert_true(is == ===)
   assert_true(is(1, 1))
   assert_true(is(1+2, 3))
@@ -12,18 +11,32 @@ function test_core()
   assert_false(is == ==)
   assert_false(is("", ""))
   assert_false(is([], []))
+
+if VERSION.minor > 3 @eval begin
+  assert_equal(Core, @which is)
+end end
+
 end
 
 function test_char()
   x = '\U1f355'
-  assert_equal(2, charwidth(x))
   assert_true(isa(x, Char))
   assert_isa(x, Char)
+
+if VERSION.minor > 3 @eval begin
+  x = '\U1f355'
+  assert_equal(2, charwidth(x))
+end end
+
 end
 
 function test_nothing()
   assert_equal(nothing, eval(symbol(string(nothing))))
+
+if VERSION.minor > 3 @eval begin
   assert_isa(nothing, Void)
+end end
+
 end
 
 if is_main()

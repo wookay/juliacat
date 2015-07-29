@@ -3,7 +3,14 @@
 
 include("../juliacat/UnitTest.jl")
 
+if !(VERSION.minor > 3)
+  macro enum(t...)
+  end
+end
+
 @enum 혈액형 O A B AB
+
+if VERSION.minor > 3 @eval begin
 
 function test_enums()
   assert_equal(0, Int(O))
@@ -15,6 +22,8 @@ function test_enums()
   assert_equal("A", string(A))
   assert_equal("A::혈액형", repr(A))
 end
+
+end end
 
 if is_main()
   UnitTest.run()

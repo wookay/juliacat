@@ -4,10 +4,70 @@
 include("../juliacat/UnitTest.jl")
 
 
+function test_restype()
+  f(::Type{Bool}) = 1
+  f(::Bool) = 2
+
+  assert_equal(1, f(Bool))
+  assert_equal(2, f(true))
+end
+
+type Say
+end
+function test_singleton()
+  hi(::Type{Say}) = 42
+  assert_equal(42, hi(Say))
+end
+
+begin
+  abstract 사람
+  type 선생님 <: 사람
+    이름::String
+  end
+  type 학생{T<:Int} <: 사람
+    이름::String
+    국어::T
+    산수::T
+  end
+end
+
+function test_custom_types()
+  local 홍 = 학생("홍길동", 100, 80)
+  assert_equal("홍길동", 홍.이름)
+  assert_equal(100, 홍.국어)
+  assert_equal(80, 홍.산수)
+end
+
+
+
+if VERSION.minor > 3 @eval begin
+
+function test_types()
+  # The :: operator is read as “is an instance of”
+  function k(x::Int)
+    x + 1
+  end
+  function k(x::Any)
+    x
+  end
+  assert_equal(2, k(1))
+  assert_equal("ab", k("ab"))
+
+  assert_equal(Tuple{}, typeof(()))
+  assert_equal(DataType, typeof(Int))
+  assert_equal(DataType, typeof(DataType))
+  assert_equal(true, isa(1,Int))
+
+  assert_equal(1.0, convert(FloatingPoint, 1))
+  assert_equal((1.0,2.0), promote(1, 2.0))
+
+  assert_equal(issubtype, <:)
+end
+
 function test_supertypes()
 
   function supertypes(v)
-    types = []
+    types = Type[]
     T = typeof(v)
     while true
       push!(types, T)
@@ -31,65 +91,6 @@ function test_supertypes()
   assert_equal((Int8,UInt8,Int16,UInt16,Int32,UInt32,Int64,UInt64,Int128,UInt128), Base.IntTypes)
 end
 
-function test_restype()
-  f(::Type{Bool}) = 1
-  f(::Bool) = 2
-
-  assert_equal(1, f(Bool))
-  assert_equal(2, f(true))
-end
-
-begin
-  abstract 사람
-  type 선생님 <: 사람
-    이름::String
-  end
-  type 학생{T<:Int} <: 사람
-    이름::String
-    국어::T
-    산수::T
-  end
-end
-
-function test_types()
-  # The :: operator is read as “is an instance of”
-  function k(x::Int)
-    x + 1
-  end
-  function k(x::Any)
-    x
-  end
-  assert_equal(2, k(1))
-  assert_equal("ab", k("ab"))
-
-  local 홍 = 학생("홍길동", 100, 80)
-  assert_equal("홍길동", 홍.이름)
-  assert_equal(100, 홍.국어)
-  assert_equal(80, 홍.산수)
-
-  assert_equal(Tuple{}, typeof(()))
-  assert_equal(DataType, typeof(Int))
-  assert_equal(DataType, typeof(DataType))
-  assert_equal(true, isa(1,Int))
-
-  assert_equal(1.0, convert(FloatingPoint, 1))
-  assert_equal((1.0,2.0), promote(1, 2.0))
-
-  assert_equal(issubtype, <:)
-end
-
-function test_fieldnames()
-  assert_equal([:dict], fieldnames(Set))
-  assert_equal([:dict], fieldnames(Set()))
-end
-
-type Say
-end
-function test_singleton()
-  hi(::Type{Say}) = 42
-  assert_equal(42, hi(Say))
-end
-
 function test_union()
   assert_equal(Union{Int,String}, Union{String,Int})
 
@@ -100,12 +101,33 @@ function test_union()
   assert_equal(ASCIIString, f(""))
 end
 
+
+function test_fieldnames()
+  assert_equal([:dict], fieldnames(Set))
+  assert_equal([:dict], fieldnames(Set()))
+end
+
 function test_set_theoretic_types()
   assert_equal(Int64,
     typeintersect(Union{Int64,ASCIIString}, Int64))
   assert_equal(Union{Int64,ASCIIString},
     typejoin(Int, Union{ASCIIString, Int}))
 end
+
+function test_nullable()
+  obj = Nullable(1)
+  assert_isa(obj, Nullable{Int64})
+  assert_false(isnull(obj))
+  assert_equal(1, get(obj))
+  
+  nul = Nullable{Int}()
+  assert_isa(nul, Nullable{Int})
+  assert_true(isnull(nul))
+  Base.Test.@test_throws NullException get(nul)
+end
+
+end end
+
 
 if is_main()
   UnitTest.run()

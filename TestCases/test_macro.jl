@@ -3,6 +3,8 @@
 
 include("../juliacat/UnitTest.jl")
 
+
+
 macro m0()
   :p
 end
@@ -15,6 +17,9 @@ macro m2(a, b)
   Symbol("$a$b")
 end
 
+
+if VERSION.minor > 3 @eval begin
+
 function test_macro()
   p = 5
   assert_equal(5, @m0)
@@ -23,6 +28,9 @@ function test_macro()
 
   assert_equal(pi, @m2 p i)
 end
+
+
+end end
 
 if is_main()
   UnitTest.run()

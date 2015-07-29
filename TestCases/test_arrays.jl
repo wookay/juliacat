@@ -30,6 +30,9 @@ function test_arrays_basic_functions()
 end
 
 function test_array_expression()
+  assert_equal([1 2;], [1 2])
+  assert_equal([1;], [1])
+
   assert_equal([1,2,3], [1;2;3])
   assert_equal([1,2,3], [1 2 3][:])
   assert_equal([1,2,3], [1;2;3][:])

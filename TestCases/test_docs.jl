@@ -17,6 +17,8 @@ end
 end
 
 
+if VERSION.minor > 3 @eval begin
+
 function test_dog()
   m = Base.Docs.meta(Dog)
   assert_equal(doc"dog", m[Dog])
@@ -32,6 +34,10 @@ function bark() # $(@__FILE__), line 13:
 end""", funcdoc.source[b] |> string)
 
 end
+
+
+end end
+
 
 if is_main()
   UnitTest.run()

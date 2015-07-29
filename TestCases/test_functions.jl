@@ -35,10 +35,13 @@ function test_functions()
 end
 
 function test_generic()
+
+if VERSION.minor > 3 @eval begin
   anony = () -> 42
   assert_false(isgeneric(anony))
   assert_true(isdefined(anony, :env))
   assert_isa(anony.env, SimpleVector)
+end end
 
   generic() = 42
   assert_true(isgeneric(generic))
@@ -73,6 +76,10 @@ function test_optional_arguments()
   assert_equal(1, f(a=1))
 end
 
+
+if VERSION.minor > 3 @eval begin
+
+
 # staged function
 @generated function gen(x)
   assert_equal(Int, x)
@@ -83,6 +90,9 @@ function test_generated()
   f = gen(1)
   assert_equal(3, f)
 end
+
+
+end end
 
 if is_main()
   UnitTest.run()

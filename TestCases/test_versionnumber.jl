@@ -12,7 +12,11 @@ function test_version_number()
   assert_equal(0, version.patch)
   assert_equal(("dev",), version.prerelease)
   assert_equal((3929,), version.build)
+
+if VERSION.minor > 3 @eval begin
   assert_equal(VersionNumber("1.2.3"), VersionNumber(1,2,3))
+end end
+
 end
 
 function test_nextmajor_version()

@@ -3,6 +3,8 @@
 
 include("../juliacat/UnitTest.jl")
 
+if VERSION.minor > 3 @eval begin
+
 function test_enumerate()
   d = Dict()
   for (idx, el) in enumerate("abc")
@@ -10,6 +12,9 @@ function test_enumerate()
   end
   assert_equal(Dict(1=>'a',2=>'b',3=>'c'), d)
 end
+
+end end
+
 
 function test_start_done_next()
   cnt = 0
