@@ -62,6 +62,9 @@ function test_do()
            end
   assert_equal(5, result)
   assert_equal(5, f((a,b) -> a+b))
+
+  assert_equal([2,4,6], map(x->2x, [1,2,3]))
+  assert_equal([2,4,6], map([1,2,3]) do x 2x end)
 end
 
 function test_varargs_functions()
