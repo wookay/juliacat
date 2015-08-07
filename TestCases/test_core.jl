@@ -39,6 +39,12 @@ end end
 
 end
 
+
+function test_invoke()
+  f(a) = 2a
+  assert_equal(6, invoke(f, (Int,), 3))
+end
+
 if is_main()
   UnitTest.run()
 end

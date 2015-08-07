@@ -99,6 +99,8 @@ function test_union()
 
   assert_equal(Int, f(1))
   assert_equal(ASCIIString, f(""))
+
+  assert_equal(Int64, Union{Int64, Base.Bottom})
 end
 
 

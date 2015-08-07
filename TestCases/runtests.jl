@@ -23,6 +23,7 @@ test_goto.jl
 test_hangul.jl
 test_iteration.jl
 test_linarg.jl
+test_loading.jl
 test_macro.jl
 test_mathematical_operations.jl
 test_metaprogramming.jl
