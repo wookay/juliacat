@@ -3,14 +3,16 @@
 
 include("../juliacat/UnitTest.jl")
 
-function test_core()
-  assert_true(is == ===)
-  assert_true(is(1, 1))
-  assert_true(is(1+2, 3))
-  assert_true(is(pi, pi))
-  assert_false(is == ==)
-  assert_false(is("", ""))
-  assert_false(is([], []))
+function test_equality()
+  assert_true(1  == 1.0)
+  assert_true("" == "")
+  assert_true([] == [])
+
+  assert_equal(is, ===)
+
+  assert_false(1  === 1.0)
+  assert_false("" === "")
+  assert_false([] === [])
 
 if VERSION.minor > 3 @eval begin
   assert_equal(Core, @which is)
