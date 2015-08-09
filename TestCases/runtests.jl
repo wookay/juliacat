@@ -21,6 +21,7 @@ test_floating_point_functions.jl
 test_functions.jl
 test_goto.jl
 test_hangul.jl
+test_irrationals.jl
 test_iteration.jl
 test_linarg.jl
 test_loading.jl
