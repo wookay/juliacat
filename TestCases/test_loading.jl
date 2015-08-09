@@ -1,7 +1,9 @@
 # test_loading.jl
 #                           wookay.noh at gmail.com
 
-push!(LOAD_PATH, "TestCases")
+
+push!(LOAD_PATH, dirname(@__FILE__))
+
 include("../juliacat/UnitTest.jl")
 
 
