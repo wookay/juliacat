@@ -100,6 +100,14 @@ function test_comprehensions()
 
 end
 
+function test_vector()
+  assert_equal([1,2], Vector{Int}([1,2]))
+end
+
+function test_matrix()
+  assert_equal([1 2; 3 4], Matrix{Int}([1 2; 3 4]))
+end
+
 if is_main()
   UnitTest.run()
 end
