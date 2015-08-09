@@ -2,7 +2,7 @@
 #                           wookay.noh at gmail.com
 
 
-push!(LOAD_PATH, dirname(@__FILE__))
+push!(Base.LOAD_CACHE_PATH, dirname(@__FILE__))
 
 include("../juliacat/UnitTest.jl")
 
