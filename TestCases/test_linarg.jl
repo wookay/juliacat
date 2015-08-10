@@ -44,6 +44,11 @@ function test_triangular()
   ], UpperTriangular(rand(5,5)))
 end
 
+# https://en.wikipedia.org/wiki/Hermitian_matrix
+function test_hermitian()
+  assert_true(ishermitian([2 2+im 4; 2-im 3 im; 4 -im 1]))
+end
+
 end end
 
 
