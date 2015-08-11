@@ -9,7 +9,6 @@ function test_base()
   assert_equal(Base, @which pi)
 end
 
-
 end end
 
 

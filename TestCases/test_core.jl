@@ -16,6 +16,9 @@ function test_equality()
 
 if VERSION.minor > 3 @eval begin
   assert_equal(Core, @which is)
+
+  assert_true(1 ≈ 1.00000001)
+  assert_false(1 ≈ 1.0000001)
 end end
 
 end
