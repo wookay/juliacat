@@ -21,10 +21,8 @@ test_floating_point_functions.jl
 test_functions.jl
 test_goto.jl
 test_hangul.jl
-test_irrationals.jl
 test_iteration.jl
 test_linarg.jl
-test_loading.jl
 test_macro.jl
 test_mathematical_operations.jl
 test_metaprogramming.jl
@@ -37,7 +35,7 @@ test_show.jl
 test_strings.jl
 test_sysinfo.jl
 test_throw.jl
-test_types.jl
+test_types_more.jl
 test_random.jl
 test_ranges.jl
 test_reflection.jl
@@ -49,6 +47,17 @@ test_versionnumber.jl
 """), "\n")
   include(test)
 end
+
+if VERSION.minor > 3
+  for test = split(strip("""
+test_irrationals.jl
+test_loading.jl
+test_types.jl
+"""), "\n")
+    include(test)
+  end
+end
+
 
 ignores = """
 test_code_native.jl

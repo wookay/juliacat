@@ -1,134 +1,90 @@
 # test_types.jl
 #                           wookay.noh at gmail.com
 
+if !(VERSION.minor > 3)
+  macro enum(t...)
+  end
+  println("Required Julia 0.4")
+end
+
 include("../juliacat/UnitTest.jl")
 
 
-function test_restype()
-  f(::Type{Bool}) = 1
-  f(::Bool) = 2
-
-  assert_equal(1, f(Bool))
-  assert_equal(2, f(true))
+function test_int()
+  assert_true(isa(2, Int))
+  assert_equal("Int64", string(typeof(2)))
 end
 
-type Say
-end
-function test_singleton()
-  hi(::Type{Say}) = 42
-  assert_equal(42, hi(Say))
-end
+function test_float()
+  assert_true(isa(3.14, Float64))
+  assert_equal("Float64", string(typeof(3.14)))
 
-begin
-  abstract 사람
-  type 선생님 <: 사람
-    이름::String
-  end
-  type 학생{T<:Int} <: 사람
-    이름::String
-    국어::T
-    산수::T
-  end
+  assert_true(pi > 3.14)
+  assert_true(isa(pi, Irrational))
 end
 
-function test_custom_types()
-  local 홍 = 학생("홍길동", 100, 80)
-  assert_equal("홍길동", 홍.이름)
-  assert_equal(100, 홍.국어)
-  assert_equal(80, 홍.산수)
+function test_string()
+  assert_true(isa("", String))
+  assert_equal("ASCIIString", string(typeof("")))
 end
 
+function test_array()
+  assert_true(isa(Any[], Array{Any,1}))
+  assert_equal("Array{Any,1}", string(typeof(Any[])))
 
-
-if VERSION.minor > 3 @eval begin
-
-function test_types()
-  # The :: operator is read as “is an instance of”
-  function k(x::Int)
-    x + 1
-  end
-  function k(x::Any)
-    x
-  end
-  assert_equal(2, k(1))
-  assert_equal("ab", k("ab"))
-
-  assert_equal(Tuple{}, typeof(()))
-  assert_equal(DataType, typeof(Int))
-  assert_equal(DataType, typeof(DataType))
-  assert_equal(true, isa(1,Int))
-
-  assert_equal(1.0, convert(FloatingPoint, 1))
-  assert_equal((1.0,2.0), promote(1, 2.0))
-
-  assert_equal(issubtype, <:)
+  assert_false(isa(Int[], Array{Any,1}))
+  assert_false(isa(Any[], Array{Int,1}))
 end
 
-function test_supertypes()
-
-  function supertypes(v)
-    types = Type[]
-    T = typeof(v)
-    while true
-      push!(types, T)
-      if isa(Any, T)
-        break
-      end
-      T = super(T)
-    end
-    types
-  end
-
-  assert_equal([ASCIIString,DirectIndexString,AbstractString,Any], supertypes(""))
-  assert_equal([Int64,Signed,Integer,Real,Number,Any], supertypes(0))
-  assert_equal([Float64,FloatingPoint,Real,Number,Any], supertypes(3.14))
-  assert_equal([MathConst{:π},Real,Number,Any], supertypes(pi))
-  assert_equal([Dict{Any,Any},Associative{Any,Any},Any], supertypes(Dict()))
-  assert_equal([Tuple{},Any], supertypes(()))
-  assert_equal([Array{Any,1},DenseArray{Any,1},AbstractArray{Any,1},Any], supertypes([]))
-  assert_equal([SparseMatrixCSC{Float64,Int64},AbstractSparseArray{Float64,Int64,2},AbstractArray{Float64,2},Any], supertypes(speye(0)))
-
-  assert_equal((Int8,UInt8,Int16,UInt16,Int32,UInt32,Int64,UInt64,Int128,UInt128), Base.IntTypes)
+function test_dict()
+  assert_true(isa(Dict{Int,Any}(), Dict{Int,Any}))
+  assert_equal("Dict{Int64,Any}", string(typeof(Dict{Int,Any}())))
 end
 
-function test_union()
-  assert_equal(Union{Int,String}, Union{String,Int})
-
-  IntOrString = Union{Int, String}
-  f(x::IntOrString) = typeof(x)
-
-  assert_equal(Int, f(1))
-  assert_equal(ASCIIString, f(""))
-
-  assert_equal(Int64, Union{Int64, Base.Bottom})
+function test_function()
+  f() = nothing
+  assert_true(isa(f, Function))
+  assert_equal("Function", string(typeof(f)))
+  assert_equal([Void], Base.return_types(f, ()))
 end
 
 
-function test_fieldnames()
-  assert_equal([:dict], fieldnames(Set))
-  assert_equal([:dict], fieldnames(Set()))
+@enum ABC A B
+
+function test_enum()
+  assert_true(isa(A, ABC))
+  assert_equal("ABC", string(typeof(A)))
+  assert_equal("B::ABC", repr(B))
 end
 
-function test_set_theoretic_types()
-  assert_equal(Int64,
-    typeintersect(Union{Int64,ASCIIString}, Int64))
-  assert_equal(Union{Int64,ASCIIString},
-    typejoin(Int, Union{ASCIIString, Int}))
+
+type AbcBox
+  v::Any
+
+  AbcBox() = new(0)
+end
+
+function test_type()
+  t = AbcBox()
+  assert_true(isa(t, AbcBox))
+  assert_equal("AbcBox", string(typeof(t)))
+end
+
+function test_range()
+  assert_true(isa(1:5, Range))
+  assert_equal("UnitRange{Int64}", string(typeof(1:5)))
+  assert_equal(5, length(1:5))
+end
+
+function test_tuple()
+  assert_true(isa((), Tuple{}))
+  assert_equal("Tuple{}", string(typeof(())))
 end
 
 function test_nullable()
-  obj = Nullable(1)
-  assert_isa(obj, Nullable{Int64})
-  assert_false(isnull(obj))
-  assert_equal(1, get(obj))
-  
-  nul = Nullable{Int}()
-  assert_isa(nul, Nullable{Int})
-  assert_true(isnull(nul))
-  Base.Test.@test_throws NullException get(nul)
+  n = Nullable(1)
+  assert_equal(1, get(n))
 end
-
-end end
 
 
 if is_main()

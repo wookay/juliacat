@@ -8,19 +8,19 @@ if !(VERSION.minor > 3)
   end
 end
 
-@enum 혈액형 O A B AB
+@enum 혈액형 O형 A형 B형 AB형
 
 if VERSION.minor > 3 @eval begin
 
 function test_enums()
-  assert_equal(0, Int(O))
-  assert_equal(1, Int(A))
-  assert_equal(O, 혈액형(0))
-  assert_equal(O, typemin(혈액형))
-  assert_equal(AB, typemax(혈액형))
-  assert_equal((O,A,B,AB), instances(혈액형))
-  assert_equal("A", string(A))
-  assert_equal("A::혈액형", repr(A))
+  assert_equal(0, Int(O형))
+  assert_equal(1, Int(A형))
+  assert_equal(O형, 혈액형(0))
+  assert_equal(O형, typemin(혈액형))
+  assert_equal(AB형, typemax(혈액형))
+  assert_equal((O형,A형,B형,AB형), instances(혈액형))
+  assert_equal("A형", string(A형))
+  assert_equal("A형::혈액형", repr(A형))
 end
 
 end end

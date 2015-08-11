@@ -100,6 +100,8 @@ function test_comprehensions()
 
 end
 
+if VERSION.minor > 3 @eval begin
+
 function test_vector()
   assert_equal([1,2], Vector{Int}([1,2]))
 end
@@ -107,6 +109,8 @@ end
 function test_matrix()
   assert_equal([1 2; 3 4], Matrix{Int}([1 2; 3 4]))
 end
+
+end end
 
 if is_main()
   UnitTest.run()
