@@ -69,4 +69,5 @@ test_reactive.jl
 """
 
 #UnitTest.run(debug = true)
-UnitTest.run()
+fail = UnitTest.run()
+fail && exit(1)

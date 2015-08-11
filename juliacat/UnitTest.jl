@@ -103,6 +103,8 @@ function runner(; debug = false)
     tests, UnitTest.passed, UnitTest.failed, errors)
 
   Base.have_color && print("\033[0m")
+
+  fail
 end
 
 UnitTest = UnitTestBase(runner, true, 0, 0)

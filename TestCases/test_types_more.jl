@@ -32,14 +32,17 @@ end
 
 function test_custom_types()
   선생 = 선생님("아무개")
-  assert_isa(선생, 사람)
   assert_equal("아무개", 선생.이름)
 
   홍 = 학생("홍길동", 100, 80)
-  assert_isa(홍, 사람)
   assert_equal("홍길동", 홍.이름)
   assert_equal(100, 홍.국어)
   assert_equal(80, 홍.산수)
+
+  if VERSION.minor > 3
+    assert_isa(선생, 사람)
+    assert_isa(홍, 사람)
+  end
 end
 
 
