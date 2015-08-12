@@ -14,11 +14,15 @@ function test_equality()
   assert_false("" === "")
   assert_false([] === [])
 
+  assert_true(-0 === 0)
+  assert_false(-0.0 === 0.0)
+
 if VERSION.minor > 3 @eval begin
   assert_equal(Core, @which is)
 
   assert_true(1 ≈ 1.00000001)
   assert_false(1 ≈ 1.0000001)
+
 end end
 
 end
