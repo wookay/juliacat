@@ -6,7 +6,9 @@ include("../juliacat/UnitTest.jl")
 if VERSION.minor > 3 @eval begin
 
 function test_sysinfo()
-   assert_true(startswith(Sys.get_process_title(), "julia"))
+  @windows ? () : (
+    assert_true(startswith(Sys.get_process_title(), "julia"))
+  )
 end
 
 end end
