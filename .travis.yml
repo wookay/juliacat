@@ -6,3 +6,5 @@ julia:
   - nightly
 script:
   - julia --color=yes TestCases/runtests.jl
+after_success:
+  - coveralls

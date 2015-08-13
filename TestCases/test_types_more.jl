@@ -108,6 +108,8 @@ function test_union()
   assert_equal(ASCIIString, f(""))
 
   assert_equal(Int64, Union{Int64, Base.Bottom})
+
+  assert_equal(Union{Int,String}, Union{String,Union{Int}})
 end
 
 function test_fieldnames()

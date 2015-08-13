@@ -53,6 +53,7 @@ if VERSION.minor > 3
 test_irrationals.jl
 test_loading.jl
 test_types.jl
+test_variables.jl
 """), "\n")
     include(test)
   end
@@ -63,6 +64,7 @@ ignores = """
 test_code_native.jl
 test_ccall.jl
 test_cxx.jl
+test_javacall.jl
 test_jump.jl
 test_mecab.jl
 test_reactive.jl
