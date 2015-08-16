@@ -19,10 +19,16 @@ function test_return_types()
   function f(a::String)
     a ? 1.0 : ""
   end
-
-  assert_equal([Union{Int64,ASCIIString},Union{Float64,ASCIIString}], Base.return_types(f, Tuple{Any}))
-  assert_equal([Union{Float64,ASCIIString}], Base.return_types(f, Tuple{String}))
   assert_equal([Union{Int64,ASCIIString}], Base.return_types(f, Tuple{Int}))
+  assert_equal(Any[Union{ASCIIString,Float64}], Base.return_types(f, Tuple{String}))
+  assert_equal(Any[Union{ASCIIString,Int64},Union{ASCIIString,Float64}], Base.return_types(f, (Any,)))
+
+  f(a) = rand([a]) ? 1 : nothing
+  assert_equal(Any[Union{ASCIIString,Int64},Union{ASCIIString,Float64},Union{Int64,Void}], Base.return_types(f, (Any,)))
+end
+
+function test_type_type()
+  assert_isa(Int, Type)
 end
 
 end end

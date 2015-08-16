@@ -52,6 +52,7 @@ if VERSION.minor > 3
   for test = split(strip("""
 test_irrationals.jl
 test_loading.jl
+test_stream.jl
 test_types.jl
 test_variables.jl
 """), "\n")

@@ -11,6 +11,9 @@ end
 
 end end
 
+function test_abs()
+  assert_equal(abs2(-3), abs(-3)^2)
+end
 
 function test_comparison_operator()
   assert_true(1 < 2 < 3)

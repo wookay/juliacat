@@ -39,6 +39,8 @@ function test_custom_types()
   assert_equal(100, 홍.국어)
   assert_equal(80, 홍.산수)
 
+  assert_equal([선생님, 학생], subtypes(사람))
+
   if VERSION.minor > 3
     assert_isa(선생, 사람)
     assert_isa(홍, 사람)

@@ -22,3 +22,22 @@ include("../juliacat/ArrayExt.jl")
 
 # UnitTest
 include("../juliacat/UnitTest.jl")
+module AModule
+end
+@loading AModule
+show_backtrace()
+block = quote
+  assert_equal(1, 1)
+  assert_equal(1.0, 1.0)
+  assert_not_equal(1, 2)
+  assert_true(true)
+  assert_false(false)
+  assert_isa(1, Int)
+  assert_true(is_main())
+end
+UnitTest.dot_if_passed = true
+eval(block)
+UnitTest.dot_if_passed = false
+eval(block)
+UnitTest.run()
+UnitTestBase(runner,false,0,0)
