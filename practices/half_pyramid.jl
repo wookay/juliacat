@@ -5,7 +5,7 @@ type Star
   data::Array
 end
 
-function Base.show(io::IO, s::Star)
+function show(io::IO, s::Star)
   row, col = size(s.data)
   for m in 1:row
     for n in 1:col

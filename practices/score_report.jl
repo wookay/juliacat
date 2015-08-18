@@ -1,6 +1,8 @@
 # score_report.jl
 #                           wookay.noh at gmail.com
 
+!(VERSION.minor > 3) && println("Required Julia 0.4")
+
 @enum 과목 국어 영어 수학
 
 type 학생타입

@@ -1,3 +1,5 @@
+!(VERSION.minor > 3) && println("Required Julia 0.4")
+
 type Maybe
   a
 end
