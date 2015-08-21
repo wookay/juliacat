@@ -32,7 +32,7 @@ function test_banner()
     assert_equal("""\033[1m               $(d3)_$(tx)
            $(d1)_$(tx)       $(jl)_$(tx) $(d2)_$(d3)(_)$(d4)_$(tx)     |  A fresh approach to technical computing
           $(d1)(_)$(jl)     | $(d2)(_)$(tx) $(d4)(_)$(tx)    |  Documentation: http://docs.julialang.org
-           $(jl)_ _   _| |_  __ _$(tx)   |  Type \"help()\" for help.
+           $(jl)_ _   _| |_  __ _$(tx)   |  Type \"?help\" for help.
           $(jl)| | | | | | |/ _` |$(tx)  |
           $(jl)| | |_| | | | (_| |$(tx)  |  Version $(VERSION)$(commit_date)
          $(jl)_/ |\\__'_|_|_|\\__'_|$(tx)  |  $(commit_string)
