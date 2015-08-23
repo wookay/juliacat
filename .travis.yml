@@ -1,7 +1,7 @@
 language: julia
 notifications:
   email: false
-sudo: fals
+sudo: false
 os:
   - linux
 julia:
