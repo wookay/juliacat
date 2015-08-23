@@ -44,4 +44,5 @@ eval(block)
 exit_code = 0
 exit_code |= UnitTestBase(runner,true,0,0).run()
 exit_code |= UnitTestBase(runner,false,0,0).run()
+println("exit: $exit_code")
 exit(exit_code)
