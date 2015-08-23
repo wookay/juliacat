@@ -7,7 +7,9 @@ julia:
   - release
   - nightly
 script:
-  - julia --color=yes --code-coverage test/runtests.jl
+  - echo $TRAVIS_JULIA_VERSION
+  - if [ $TRAVIS_JULIA_VERSION = "nightly" ]; then julia --color=yes --code-coverage test/runtests.jl; fi
+  - if [ $TRAVIS_JULIA_VERSION = "release" ]; then julia --color=yes test/runtests.jl; fi
   - julia --color=yes TestCases/runtests.jl
 after_success:
   - julia -e 'Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder("juliacat"))'
