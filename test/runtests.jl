@@ -27,7 +27,7 @@ end
 @loading AModule
 show_backtrace()
 block = quote
-  assert_equal(1, 2)
+  #assert_equal(1, 2)
   assert_equal(1, 1)
   assert_equal(1.0, 1.0)
   assert_not_equal(1, 2)
@@ -40,5 +40,8 @@ UnitTest.dot_if_passed = true
 eval(block)
 UnitTest.dot_if_passed = false
 eval(block)
-UnitTestBase(runner,true,0,0).run()
-UnitTestBase(runner,false,0,0).run()
+
+exit_code = 0
+exit_code |= UnitTestBase(runner,true,0,0).run()
+exit_code |= UnitTestBase(runner,false,0,0).run()
+exit(exit_code)
