@@ -3,6 +3,22 @@
 
 include("../juliacat/UnitTest.jl")
 
+function test_diagonal()
+  assert_equal(eye(Int,3), Diagonal(ones(Int,3,3)))
+  twos = ones(Int,3,3)+1
+  assert_equal([
+    2  0  0
+    0  2  0
+    0  0  2
+  ], Diagonal(twos))
+end
+
+
+# https://en.wikipedia.org/wiki/Hermitian_matrix
+function test_hermitian()
+  assert_true(ishermitian([2 2+im 4; 2-im 3 im; 4 -im 1]))
+end
+
 function test_lu_factorization()
   A = [4 3; 6 3]
   (L, U, p) = lu(A)
@@ -23,8 +39,21 @@ function test_lu_factorization()
   assert_equal([2,3,1], p)
 end
 
-
 if VERSION.minor > 3 @eval begin
+
+function test_tridiagonal()
+  n = 5
+  z = zeros(Int, n-1)
+  assert_equal([0;0;0;0], z)
+  assert_equal([1;2;3;4;5], [1:n;])
+  assert_equal([
+    1  0  0  0  0
+    0  2  0  0  0
+    0  0  3  0  0
+    0  0  0  4  0
+    0  0  0  0  5
+  ], Tridiagonal(z, [1:n;], z))
+end
 
 function test_triangular()
   srand(0)
@@ -44,13 +73,7 @@ function test_triangular()
   ], UpperTriangular(rand(5,5)))
 end
 
-# https://en.wikipedia.org/wiki/Hermitian_matrix
-function test_hermitian()
-  assert_true(ishermitian([2 2+im 4; 2-im 3 im; 4 -im 1]))
-end
-
 end end
-
 
 if is_main()
   UnitTest.run()

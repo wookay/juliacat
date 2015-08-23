@@ -32,6 +32,7 @@ test_parallel_computing.jl
 test_promotion.jl
 test_serialize.jl
 test_show.jl
+test_sparse.jl
 test_strings.jl
 test_sysinfo.jl
 test_throw.jl
