@@ -1,5 +1,7 @@
 !(VERSION.minor > 3) && println("Required Julia 0.4")
 
+import Base: ==
+
 type Maybe
   a
 end

@@ -52,14 +52,34 @@ end
 
 if VERSION.minor > 3 @eval begin
 
+import Base: +
 function test_vararg()
+
+  Base.Test.@test_throws UndefVarError +(())
+  Base.Test.@test_throws UndefVarError +((1,2))
+
   +(a::Tuple{Vararg{Int}}) = string(a)
-  assert_equal("()"      , +(())      )
-  assert_equal("(1,)"    , +((1...))  )
-  assert_equal("(1,)"    , +((1,))    )
-  assert_equal("(1,2)"   , +((1,2))   )
-  assert_equal("(1,2,3)" , +((1,2,3)) )
+
+  Base.Test.@test_throws MethodError +(())
   Base.Test.@test_throws MethodError +((1))
+  Base.Test.@test_throws MethodError +((1,))
+  Base.Test.@test_throws MethodError +((1...))
+  Base.Test.@test_throws MethodError +((1,2))
+
+  tup = ()
+  assert_equal("()" , +(tup) )
+
+  tup = (1)
+  Base.Test.@test_throws MethodError +(tup)
+
+  tup = (1,)
+  assert_equal("(1,)" , +(tup) )
+
+  tup = (1...)
+  assert_equal("(1,)" , +(tup) )
+
+  tup = (1,2)
+  assert_equal("(1,2)" , +(tup) )
 end
 
 end end

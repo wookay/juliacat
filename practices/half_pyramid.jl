@@ -1,6 +1,8 @@
 # half_pyramid.jl
 #                           wookay.noh at gmail.com
 
+import Base: ==
+
 type Star
   data::Array
 end

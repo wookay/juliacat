@@ -100,6 +100,15 @@ function test_comprehensions()
 
 end
 
+function test_ndims()
+  assert_equal(1, ndims([]))
+  assert_equal(1, ndims([][:]))
+  assert_equal(2, ndims([][:,:]))
+  assert_equal((0,), size([]))
+  assert_equal((0,), size([][:]))
+  assert_equal((0,1), size([][:,:]))
+end
+
 if VERSION.minor > 3 @eval begin
 
 function test_vector()

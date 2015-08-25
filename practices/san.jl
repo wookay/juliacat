@@ -1,6 +1,8 @@
 # 算
 # http://pgr21.com/pb/pb.php?id=freedom&no=58557
 
+import Base: *
+
 正 = +
 負 = -
 密率 = pi
