@@ -15,6 +15,7 @@ test_core.jl
 test_dates.jl
 test_docs.jl
 test_enums.jl
+test_essentials.jl
 test_fft.jl
 test_file.jl
 test_floating_point_functions.jl

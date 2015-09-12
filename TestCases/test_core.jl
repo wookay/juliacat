@@ -82,6 +82,10 @@ function test_vararg()
   assert_equal("(1,2)" , +(tup) )
 end
 
+function test_void()
+  assert_equal(nothing, Void())
+end
+
 end end
 
 

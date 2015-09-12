@@ -121,6 +121,16 @@ end
 
 end end
 
+function test_ndims()
+  a = zeros(Int, 2, 3 ,4)
+  assert_equal(3, ndims(a))
+  assert_equal("[0 0 0\n 0 0 0]\n\n[0 0 0\n 0 0 0]\n\n[0 0 0\n 0 0 0]\n\n[0 0 0\n 0 0 0]", string(a))
+  a[:,:,1] = [1 2 3; 4 5 6]
+  a[2,end,2] = 8
+  assert_equal("[1 2 3\n 4 5 6]\n\n[0 0 0\n 0 0 8]\n\n[0 0 0\n 0 0 0]\n\n[0 0 0\n 0 0 0]", string(a))
+  assert_equal(7, ndims(zeros(Int, 2,3,1,1,1,1,1)))
+end
+
 if is_main()
   UnitTest.run()
 end
