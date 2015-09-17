@@ -3,6 +3,10 @@
 
 include("../juliacat/UnitTest.jl")
 
+if VERSION.minor == 3
+  abstract AbstractString
+end
+
 function test_multiple_dispatch()
   f(::Type{Bool}) = 1
   f(::Bool) = 2
@@ -21,14 +25,17 @@ end
 begin
   abstract 사람
   type 선생님 <: 사람
-    이름::String
+    이름::AbstractString
   end
   type 학생{Score<:Int} <: 사람
-    이름::String
+    이름::AbstractString
     국어::Score
     산수::Score
   end
 end
+
+
+if VERSION.minor > 3 @eval begin
 
 function test_custom_types()
   선생 = 선생님("아무개")
@@ -41,18 +48,12 @@ function test_custom_types()
 
   assert_equal([선생님, 학생], subtypes(사람))
 
-  if VERSION.minor > 3
-    assert_isa(선생, 사람)
-    assert_isa(홍, 사람)
-  end
+  assert_isa(선생, 사람)
+  assert_isa(홍, 사람)
 end
 
-
-
-if VERSION.minor > 3 @eval begin
-
 function test_types()
-  # The :: operator is read as “is an instance of”
+  # The :: operator is read as "is an instance of"
   function k(x::Int)
     x + 1
   end
@@ -67,7 +68,7 @@ function test_types()
   assert_equal(DataType, typeof(DataType))
   assert_equal(true, isa(1,Int))
 
-  assert_equal(1.0, convert(FloatingPoint, 1))
+  assert_equal(1.0, convert(AbstractFloat, 1))
   assert_equal((1.0,2.0), promote(1, 2.0))
 
   assert_equal(issubtype, <:)
@@ -90,8 +91,8 @@ function test_supertypes()
 
   assert_equal([ASCIIString,DirectIndexString,AbstractString,Any], supertypes(""))
   assert_equal([Int64,Signed,Integer,Real,Number,Any], supertypes(0))
-  assert_equal([Float64,FloatingPoint,Real,Number,Any], supertypes(3.14))
-  assert_equal([MathConst{:π},Real,Number,Any], supertypes(pi))
+  assert_equal([Float64,AbstractFloat,Real,Number,Any], supertypes(3.14))
+  assert_equal([Irrational{:π},Real,Number,Any], supertypes(pi))
   assert_equal([Dict{Any,Any},Associative{Any,Any},Any], supertypes(Dict()))
   assert_equal([Tuple{},Any], supertypes(()))
   assert_equal([Array{Any,1},DenseArray{Any,1},AbstractArray{Any,1},Any], supertypes([]))
@@ -101,9 +102,9 @@ function test_supertypes()
 end
 
 function test_union()
-  assert_equal(Union{Int,String}, Union{String,Int})
+  assert_equal(Union{Int,AbstractString}, Union{AbstractString,Int})
 
-  IntOrString = Union{Int, String}
+  IntOrString = Union{Int, AbstractString}
   f(x::IntOrString) = typeof(x)
 
   assert_equal(Int, f(1))
@@ -111,7 +112,7 @@ function test_union()
 
   assert_equal(Int64, Union{Int64, Base.Bottom})
 
-  assert_equal(Union{Int,String}, Union{String,Union{Int}})
+  assert_equal(Union{Int,AbstractString}, Union{AbstractString,Union{Int}})
 end
 
 function test_fieldnames()

@@ -5,8 +5,8 @@ include("../juliacat/UnitTest.jl")
 
 if VERSION.minor > 3 @eval begin
 
-function test_asyncstream()
-  assert_isa(STDOUT, Base.AsyncStream)
+function test_io()
+  assert_isa(STDOUT, Base.IO)
 end
 
 end end

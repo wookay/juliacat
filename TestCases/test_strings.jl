@@ -28,11 +28,11 @@ function test_strings()
 
   assert_equal("abc", string("a","b","c"))
 
-  const SPACE = " "
+  #const SPACE = " "
   assert_equal(["Hello","world"], split(str, SPACE))
   assert_equal(str, join(["Hello","world"], SPACE))
 
-  const LF = "\n"
+  #const LF = "\n"
   local multilined = """a
 b
 c"""
@@ -40,9 +40,11 @@ c"""
 
   assert_equal("abc", *("a", "b", "c"))
 
-  +(s::String...) = join(s)
-  assert_equal("ab", "a" + "b")
-  assert_equal("abc", +("a", "b", "c"))
+  if VERSION.minor > 3 @eval begin
+    +(s::AbstractString...) = join(s)
+    assert_equal("ab", "a" + "b")
+    assert_equal("abc", +("a", "b", "c"))
+  end end
 end
 
 function test_regex()

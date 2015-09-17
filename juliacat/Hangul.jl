@@ -1,6 +1,11 @@
 # Hangul.jl
 #                           wookay.noh at gmail.com
 
+
+if VERSION.minor == 3
+  abstract AbstractString
+end
+
 if isdefined(:SPACE)
 else
   include("StringExt.jl")
@@ -29,7 +34,7 @@ function hangul_split_uchar(uchar)
   end
 end
 
-function hangul_split(str::String)
+function hangul_split(str::AbstractString)
   local ary = []
   for uchar = str
     push!(ary, hangul_split_uchar(uchar))
@@ -37,7 +42,7 @@ function hangul_split(str::String)
   return ary
 end
 
-function hangul_chosungs(str::String)
+function hangul_chosungs(str::AbstractString)
   local ary = []
   for uchar = str
     local t = hangul_split_uchar(uchar)

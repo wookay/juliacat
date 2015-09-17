@@ -24,7 +24,7 @@ function test_float()
 end
 
 function test_string()
-  assert_true(isa("", String))
+  assert_true(isa("", AbstractString))
   assert_equal("ASCIIString", string(typeof("")))
 end
 

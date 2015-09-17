@@ -16,11 +16,11 @@ function test_return_types()
   function f(a::Int)
     a ? 1 : ""
   end
-  function f(a::String)
+  function f(a::AbstractString)
     a ? 1.0 : ""
   end
   assert_equal([Union{Int64,ASCIIString}], Base.return_types(f, Tuple{Int}))
-  assert_equal(Any[Union{ASCIIString,Float64}], Base.return_types(f, Tuple{String}))
+  assert_equal(Any[Union{ASCIIString,Float64}], Base.return_types(f, Tuple{AbstractString}))
   assert_equal(Any[Union{ASCIIString,Int64},Union{ASCIIString,Float64}], Base.return_types(f, (Any,)))
 
   f(a) = rand([a]) ? 1 : nothing
