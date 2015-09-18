@@ -12,10 +12,15 @@ end
 function show_backtrace()
   b = backtrace()[4]
   lkup = ccall(:jl_lookup_code_address, Any, (Ptr{Void}, Cint), b, true)
-  fname, file, line, inlinedat_file, inlinedat_line, fromC = lkup
   buf = IOBuffer()
   n = 0
-  Base.show_trace_entry(buf, fname, file, line, inlinedat_file, inlinedat_line, n)
+  if VERSION.minor > 3
+    fname, file, line, inlinedat_file, inlinedat_line, fromC = lkup
+    Base.show_trace_entry(buf, fname, file, line, inlinedat_file, inlinedat_line, n)
+  else
+    fname, file, line = lkup
+    Base.show_trace_entry(buf, fname, file, line, n)
+  end
   trace = takebuf_string(buf)
   close(buf)
   lstrip(trace)
