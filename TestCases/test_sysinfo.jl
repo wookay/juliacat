@@ -7,7 +7,7 @@ if VERSION.minor > 3 @eval begin
 
 function test_sysinfo()
   @windows ? () : (
-    assert_true(startswith(Sys.get_process_title(), "julia"))
+    assert_true(endswith(Sys.get_process_title(), "julia"))
   )
 end
 

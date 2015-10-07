@@ -15,12 +15,18 @@ function test_banner()
   commit_date = " ($(Base.GIT_VERSION_INFO.date_string))"
   distance = Base.GIT_VERSION_INFO.fork_master_distance
   commit = Base.GIT_VERSION_INFO.commit_short
-  if distance == 0
-    commit_string = "Commit $(commit) ($(days) $(unit) old master)"
+  tagged_commit = Base.GIT_VERSION_INFO.tagged_commit
+  if tagged_commit
+    commit_string = "Official http://julialang.org/ release"
   else
-    branch = Base.GIT_VERSION_INFO.branch
-    commit_string = "$(branch)/$(commit) (fork: $(distance) commits, $(days) $(unit))"
+    if distance == 0
+      commit_string = "Commit $(commit) ($(days) $(unit) old master)"
+    else
+      branch = Base.GIT_VERSION_INFO.branch
+      commit_string = "$(branch)/$(commit) (fork: $(distance) commits, $(days) $(unit))"
+    end
   end
+
   if Base.have_color
     tx = "\033[0m\033[1m" # text
     jl = "\033[0m\033[1m" # julia
@@ -44,7 +50,7 @@ function test_banner()
                        _
            _       _ _(_)_     |  A fresh approach to technical computing
           (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
-           _ _   _| |_  __ _   |  Type "help()" for help.
+           _ _   _| |_  __ _   |  Type "?help" for help.
           | | | | | | |/ _` |  |
           | | |_| | | | (_| |  |  Version $(VERSION)$(commit_date)
          _/ |\\__'_|_|_|\\__'_|  |  $(commit_string)

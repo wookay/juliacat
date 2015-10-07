@@ -1,24 +1,27 @@
 using Base.Test
 
-# Hangul
-include("../juliacat/Hangul.jl")
+if VERSION.minor >= 5 @eval begin
 
-if VERSION.minor > 3 @eval begin
+@testset "hangul" begin
+  include("../juliacat/Hangul.jl")
 
-han = hangul_split("한")
-@test Any[["ㅎ","ㅏ","ㄴ"]] == han
-cho = hangul_chosungs("한")
-@test ["ㅎ"] == cho
-@test "한" == hangul_join(["ㅎ","ㅏ","ㄴ"])
+  han = hangul_split("한")
+  @test Any[["ㅎ","ㅏ","ㄴ"]] == han
+  cho = hangul_chosungs("한")
+  @test ["ㅎ"] == cho
+  @test "한" == hangul_join(["ㅎ","ㅏ","ㄴ"])
+end
 
 end end
-
 
 # ArrayExt
 include("../juliacat/ArrayExt.jl")
 
 @test 2 == index([1,5,3], 5)
 
+
+OLD_STDOUT = STDOUT
+rd, wr = redirect_stdout()
 
 # UnitTest
 include("../juliacat/UnitTest.jl")
@@ -45,4 +48,6 @@ exit_code = 0
 exit_code |= UnitTestBase(runner,true,0,0).run()
 exit_code |= UnitTestBase(runner,false,0,0).run()
 println("exit: $exit_code")
+
+redirect_stdout(OLD_STDOUT)
 exit(exit_code)

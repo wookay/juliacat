@@ -10,7 +10,7 @@ GICC,15-07-25,AC 밀란,1-0,인터밀란
 INT CF,15-07-19,올랭피크 리옹,2-1,AC 밀란"""
 
 type Team
-  name::String
+  name::AbstractString
   score::Int
 end
 
