@@ -89,9 +89,13 @@ function test_comprehensions()
  18  27
 ], A[:,1:2]) # 9x2 Array{Int64,2}
   
+
+if VERSION.minor >= 5
   assert_equal([
- 2  3  4  5  6  7  8  9
+ 2, 3, 4,  5,  6,  7,  8,  9
 ], A[1,:]) # 1x8 Array{Int64,2}
+end
+
 
   assert_equal([
  2  3  4   5   6   7   8   9

@@ -54,7 +54,9 @@ end
 function test_enum()
   assert_true(isa(A, ABC))
   assert_equal("ABC", string(typeof(A)))
-  assert_equal("B::ABC", repr(B))
+  if VERSION.minor >= 5
+    assert_equal("B::ABC = 1", repr(B))
+  end
 end
 
 

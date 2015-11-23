@@ -20,7 +20,9 @@ function test_enums()
   assert_equal(AB형, typemax(혈액형))
   assert_equal((O형,A형,B형,AB형), instances(혈액형))
   assert_equal("A형", string(A형))
-  assert_equal("A형::혈액형", repr(A형))
+  if VERSION.minor >= 5
+    assert_equal("A형::혈액형 = 1", repr(A형))
+  end
 end
 
 end end

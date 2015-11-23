@@ -9,7 +9,6 @@ test_arrays.jl
 test_banner.jl
 test_base.jl
 test_code_generation.jl
-test_combinatorics.jl
 test_control_flow.jl
 test_core.jl
 test_dates.jl
@@ -64,12 +63,15 @@ end
 
 
 ignores = """
-test_code_native.jl
 test_ccall.jl
+test_code_native.jl
+test_combinatorics.jl
 test_cxx.jl
 test_javacall.jl
 test_jump.jl
 test_mecab.jl
+test_pycall.jl
+test_rcall.jl
 test_reactive.jl
 """
 

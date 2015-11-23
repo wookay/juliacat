@@ -3,6 +3,8 @@
 
 include("../juliacat/UnitTest.jl")
 
+using Combinatorics
+
 function test_permutations()
   assert_equal(Any[[1,2],[2,1]], collect(permutations([1,2])))
 end
